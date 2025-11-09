@@ -10,8 +10,9 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { auth } from '../firebase/firebase.init';
+
 import { AuthContext } from './AuthContext';
+import { auth } from '../firebase/firebase.init';
 
 const provider = new GoogleAuthProvider();
 const AuthProvider = ({ children }) => {
@@ -52,7 +53,9 @@ const AuthProvider = ({ children }) => {
   const logOut = () => {
     return signOut(auth);
   };
+  const hi = 'hello';
   const authInfo = {
+    hi,
     user,
     setUser,
     login,

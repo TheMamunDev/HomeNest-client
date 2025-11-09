@@ -1,9 +1,172 @@
-import React from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { FaLock } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { handleFirebaseError } from '../../../utilis/firebaseErrorHandle';
+import Spinner from '../../Spinner';
+import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { user, login, handleGoogleLogin, loading } = useContext(AuthContext);
+  const from = location.state?.from?.pathname || '/';
+  const [showPass, setShowPass] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user, navigate, from]);
+  if (loading) {
+    return <Spinner></Spinner>;
+  }
+  const handleLogin = e => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
+    login(email, password)
+      .then(result => {
+        toast.success('Login Successfull..');
+        navigate(from, { replace: true });
+        console.log(result.user);
+      })
+      .catch(error => {
+        handleFirebaseError(error);
+        // return;
+      });
+  };
+
+  const handleGoogleBtn = e => {
+    e.preventDefault();
+    // console.log('btn clicked');
+    handleGoogleLogin()
+      .then(data => {
+        navigate(from, { replace: true });
+        toast.success('Successfully Logged in');
+        console.log(data);
+      })
+      .catch(error => {
+        console.log(error.message);
+        handleFirebaseError(error);
+      });
+  };
+  const showPassHandle = e => {
+    e.preventDefault();
+    setShowPass(!showPass);
+  };
+
   return (
-    <div>
-      <h3>this is login page</h3>
+    <div className="min-h-[70vh] flex items-center justify-center p-4 md:p-10 bg-gray-50">
+      <div
+        className="w-full max-w-md bg-white p-8 rounded-lg shadow-2xl border border-gray-200"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <h2 className="main-heading text-center mb-2">
+          Login to <span className="text-primary">HomeNest</span>
+        </h2>
+
+        <p className="text-center text-gray-600 mb-8">
+          Access your account to manage your listings and profile.
+        </p>
+        <form onSubmit={handleLogin} className="space-y-6">
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text font-medium text-gray-700">
+                Email Address
+              </span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              className="input input-bordered w-full focus:border-primary focus:ring-primary"
+              required
+            />
+          </div>
+
+          <div className="form-control relative">
+            <label className="input validator w-full">
+              <FaLock size={18} className="text-gray-500" />
+              <input
+                type={showPass ? 'text' : 'password'}
+                name="password"
+                required
+                placeholder="Password"
+              />
+              <button onClick={showPassHandle}>
+                {showPass ? <IoIosEyeOff /> : <IoIosEye />}
+              </button>
+            </label>
+            <div className="label pt-1 pb-0 justify-end">
+              <p className="label-text-alt text-primary hover:underline text-sm transition-colors">
+                Forgot password?
+              </p>
+            </div>
+          </div>
+
+          <div className="form-control mt-8">
+            <button
+              type="submit"
+              className="btn btn-primary w-full text-lg font-semibold transition duration-300"
+            >
+              Login
+            </button>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <div className="h-px w-full bg-[#059669]"></div>
+            <span className="text-sm text-black opacity-50">or</span>
+            <div className="h-px w-full bg-[#059669]"></div>
+          </div>
+          <button
+            onClick={handleGoogleBtn}
+            className="btn btn-lg w-full bg-white text-black border-[#e5e5e5] cursor-pointer"
+          >
+            <svg
+              aria-label="Google logo"
+              width="16"
+              height="16"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <g>
+                <path d="m0 0H512V512H0" fill="#fff"></path>
+                <path
+                  fill="#34a853"
+                  d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+                ></path>
+                <path
+                  fill="#4285f4"
+                  d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+                ></path>
+                <path
+                  fill="#fbbc02"
+                  d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+                ></path>
+                <path
+                  fill="#ea4335"
+                  d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+                ></path>
+              </g>
+            </svg>
+            Login with Google
+          </button>
+        </form>
+
+        <div className="text-center mt-6">
+          <p className="text-sm text-gray-600">
+            Don't have an account?
+            <Link
+              to="/signup"
+              className="text-primary font-semibold ml-1 hover:underline"
+            >
+              Register Here
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

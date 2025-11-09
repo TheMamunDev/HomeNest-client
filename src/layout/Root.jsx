@@ -3,6 +3,7 @@ import { Outlet, useNavigation } from 'react-router';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import { ToastContainer } from 'react-toastify';
+import Spinner from '../components/Spinner';
 
 const Root = () => {
   const navigation = useNavigation();

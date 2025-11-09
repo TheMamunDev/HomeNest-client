@@ -1,9 +1,156 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router';
+import { AuthContext } from '../../contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
+  const { user, loading, logOut } = useContext(AuthContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+  useEffect(() => {
+    if (user) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [user]);
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        toast.success('Log Out Successfull');
+      })
+      .catch(error => {
+        toast.error(error.message);
+      });
+  };
+
+  const navLinks = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/properties">All Properties</NavLink>
+      </li>
+      {isLoggedIn && (
+        <>
+          <li>
+            <NavLink to="/add-property">Add Property</NavLink>
+          </li>
+          <li>
+            <NavLink to="/my-properties">My Properties</NavLink>
+          </li>
+          <li>
+            <NavLink to="/my-ratings">My Ratings</NavLink>
+          </li>
+        </>
+      )}
+    </>
+  );
+  console.log(user);
+  const authUI = loading ? (
+    <span> Loading......</span>
+  ) : isLoggedIn ? (
+    <div className="dropdown dropdown-end">
+      <div
+        tabIndex={0}
+        role="button"
+        className="btn btn-ghost btn-circle avatar transition-transform duration-300 hover:scale-105"
+      >
+        <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <img
+            alt={user?.displayName}
+            src={user?.photoURL || 'https://i.pravatar.cc/150?img=50'}
+            className="object-cover w-full h-full"
+          />
+        </div>
+      </div>
+      <ul
+        tabIndex={0}
+        className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-xl bg-base-100 rounded-box w-64 border border-gray-100"
+      >
+        <li className="px-4 py-2 border-b border-gray-100">
+          <span className="font-bold text-lg text-gray-900">
+            {user?.displayName}
+          </span>
+          <span className="text-xs text-gray-500 truncate mt-[-5px]">
+            {user?.email}
+          </span>
+        </li>
+        <li>
+          <button
+            className="btn btn-sm btn-ghost w-full justify-start text-red-500 hover:bg-red-50"
+            onClick={handleLogOut}
+          >
+            Log out
+          </button>
+        </li>
+      </ul>
+    </div>
+  ) : (
+    <div className="flex gap-2">
+      <Link
+        to="/login"
+        className="btn btn-outline btn-sm btn-primary hover:bg-primary hover:text-white transition duration-300"
+      >
+        Login
+      </Link>
+      <Link
+        to="/signup"
+        className="btn btn-primary btn-sm transition duration-300"
+      >
+        Signup
+      </Link>
+    </div>
+  );
+
   return (
-    <div>
-      <h2>this is navbara </h2>
+    <div
+      className="navbar bg-light-realestate shadow-md sticky top-0 z-50 px-4 md:px-8"
+      data-aos="fade-down"
+    >
+      <div className="navbar-start">
+        <div className="dropdown">
+          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
+          </div>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {navLinks}
+          </ul>
+        </div>
+
+        <Link
+          to="/"
+          className="btn btn-ghost normal-case text-xl hover:bg-transparent"
+        >
+          <span className="text-2xl lg:text-3xl font-bold text-gray-800">
+            Home<span className="text-primary">Nest</span>
+          </span>
+        </Link>
+      </div>
+
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1 font-medium space-x-2">
+          {navLinks}
+        </ul>
+      </div>
+      <div className="navbar-end">{authUI}</div>
     </div>
   );
 };

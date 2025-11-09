@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <h2>this is homee</h2>
     </div>
   );
