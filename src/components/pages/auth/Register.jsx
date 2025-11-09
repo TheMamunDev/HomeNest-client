@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { handleFirebaseError } from '../../../utilis/firebaseErrorHandle';
-import Spinner from '../../Spinner';
-import {  FaLock } from 'react-icons/fa';
+import Spinner from '../../common/Spinner';
+import { FaLock } from 'react-icons/fa';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
 const Register = () => {

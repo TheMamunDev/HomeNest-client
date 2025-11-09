@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { handleFirebaseError } from '../../../utilis/firebaseErrorHandle';
-import Spinner from '../../Spinner';
+import Spinner from '../../common/Spinner';
 import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
 const Login = () => {
