@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
-import ListingCard from './ListingCard';
 import { useQuery } from '@tanstack/react-query';
 import { fetchFeaturedListing } from '../../../Api/api';
-
+import ListingCard from './ListingCard';
 const FeaturedListing = () => {
   const { data } = useQuery({
     queryKey: ['post'],

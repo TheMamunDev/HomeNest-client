@@ -4,6 +4,8 @@ import Root from '../Layout/Root';
 import Home from '../components/pages/Home/Home';
 import Login from '../components/pages/auth/Login';
 import Register from '../components/pages/auth/Register';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import AddProperty from '../components/pages/listingPages/AddProperty';
 
 export const Router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ export const Router = createBrowserRouter([
       {
         path: 'signup',
         Component: Register,
+      },
+      {
+        path: 'add-property',
+        element: (
+          <PrivateRoute>
+            <AddProperty></AddProperty>
+          </PrivateRoute>
+        ),
       },
     ],
   },

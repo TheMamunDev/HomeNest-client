@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaLock } from 'react-icons/fa';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { handleFirebaseError } from '../../../utilis/firebaseErrorHandle';
@@ -9,15 +9,17 @@ import { IoIosEye, IoIosEyeOff } from 'react-icons/io';
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, login, handleGoogleLogin, loading } = useContext(AuthContext);
-  const from = location.state?.from?.pathname || '/';
   const [showPass, setShowPass] = useState(false);
-
+  // console.log(from);
+  const from = location.state?.from?.pathname || '/';
   useEffect(() => {
     if (user) {
       navigate(from, { replace: true });
     }
   }, [user, navigate, from]);
+  console.log(from);
   if (loading) {
     return <Spinner></Spinner>;
   }

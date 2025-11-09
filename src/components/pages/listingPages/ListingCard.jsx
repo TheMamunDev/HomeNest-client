@@ -52,18 +52,7 @@ const ListingCard = ({ listing }) => {
           </p>
         </div>
 
-        <div className="card-actions justify-between items-center mt-3">
-          {hasBedBath && (
-            <div className="flex gap-4 text-gray-500 text-sm">
-              <span className="flex items-center gap-1 font-medium">
-                <IoIosBed className="w-4 h-4" /> {listing.beds}
-              </span>
-              <span className="flex items-center gap-1 font-medium">
-                <MdBathtub className="w-4 h-4" />
-                {listing.baths}
-              </span>
-            </div>
-          )}
+        <div className="card-actions justify-end items-center mt-3">
           <Link
             to={`/properties/${listing._id}`}
             className="btn btn-sm btn-primary transition duration-300"

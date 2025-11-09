@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
+import MyLink from './MyLink';
 
 const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
@@ -27,27 +28,27 @@ const Navbar = () => {
   const navLinks = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <MyLink to="/">Home</MyLink>
       </li>
       <li>
-        <NavLink to="/properties">All Properties</NavLink>
+        <MyLink to="/properties">All Properties</MyLink>
       </li>
       {isLoggedIn && (
         <>
           <li>
-            <NavLink to="/add-property">Add Property</NavLink>
+            <MyLink to="/add-property">Add Property</MyLink>
           </li>
           <li>
-            <NavLink to="/my-properties">My Properties</NavLink>
+            <MyLink to="/my-properties">My Properties</MyLink>
           </li>
           <li>
-            <NavLink to="/my-ratings">My Ratings</NavLink>
+            <MyLink to="/my-ratings">My Ratings</MyLink>
           </li>
         </>
       )}
     </>
   );
-  console.log(user);
+  // console.log(user);
   const authUI = loading ? (
     <span> Loading......</span>
   ) : isLoggedIn ? (
