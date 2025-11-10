@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import { FaSliders } from 'react-icons/fa6';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router';
 import SearchFilter from './Search';
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -9,122 +7,30 @@ import {
   getFilteredListings,
   getPriceRange,
 } from '../../../Api/api';
-
-// --- MOCK ICONS (Simulating react-icons for environment stability) ---
-const IconLocation = props => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    viewBox="0 0 24 24"
-    {...props}
-  >
-    <path
-      fill="currentColor"
-      d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5z"
-    />
-  </svg>
-);
-const IconDollar = props => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    viewBox="0 0 24 24"
-    {...props}
-  >
-    <path
-      fill="currentColor"
-      d="M11 18h2V6h-2zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8zm-1.88-5.75l2.43 2.43l-.71.71l-2.43-2.43zm3.76-7.39l-2.43 2.43l.71.71l2.43-2.43z"
-    />
-  </svg>
-);
-const IconArrowRight = props => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    viewBox="0 0 24 24"
-    {...props}
-  >
-    <path
-      fill="currentColor"
-      d="m14 18l-1.4-1.45L16.15 13H4v-2h12.15l-3.55-3.55L14 6l6 6l-6 6z"
-    />
-  </svg>
-);
-
-const ListingCard = ({ listing }) => {
-  const formattedPrice =
-    listing.category === 'Rental'
-      ? `$${listing.price.toLocaleString()}/mo`
-      : `$${listing.price.toLocaleString()}`;
-
-  return (
-    // Rule 8: Equal Card Height (h-full is used within the grid item)
-    <div
-      className="card w-full h-full bg-base-100 shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100"
-      data-aos="fade-up"
-    >
-      {/* Rule 3: Uniform Image Size/Aspect Ratio */}
-      <figure className="aspect-video w-full">
-        <img
-          src={listing.img}
-          alt={listing.name}
-          className="w-full h-full object-cover"
-        />
-      </figure>
-
-      <div className="card-body p-5 flex flex-col justify-between">
-        <div>
-          <div className="flex justify-between items-start mb-2">
-            <h2 className="card-title text-xl text-secondary">
-              {listing.name}
-            </h2>
-            <div className="badge badge-accent text-xs font-semibold uppercase">
-              {listing.category}
-            </div>
-          </div>
-
-          {/* Price and Location */}
-          <div className="text-lg font-bold text-primary mb-2 flex items-center gap-1">
-            <IconDollar className="w-5 h-5 text-primary" /> {formattedPrice}
-          </div>
-
-          <p className="flex items-center text-gray-600 mb-3 text-sm">
-            <IconLocation className="w-4 h-4 mr-1" /> {listing.location}
-          </p>
-
-          {/* Posted By */}
-          <p className="text-sm text-gray-700 mt-2">
-            Posted by:{' '}
-            <span className="font-semibold text-secondary">
-              {listing.ownerName}
-            </span>
-          </p>
-        </div>
-
-        {/* See Details Button (Rule 4: Consistent Button Style) */}
-        <div className="card-actions justify-end mt-4">
-          <Link
-            to={`/properties/${listing.id}`}
-            className="btn btn-sm btn-primary transition duration-300"
-          >
-            See Details <IconArrowRight className="w-4 h-4 ml-1" />
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
-};
+import Spinner from '../../common/Spinner';
+import PropertiesCard from './PropertiesCard';
+import { AuthContext } from '../../../contexts/AuthContext';
+import Heading from '../../common/Heading';
+import MyListingSkeleton from '../../common/MyListingSkeleton';
+import { toast } from 'react-toastify';
+import useTitle from '../../../Hooks/useTitle';
 
 const Properties = () => {
+  useTitle('Properties');
+  const { user } = useContext(AuthContext);
+
   const [filters, setFilters] = useState({
     category: 'All',
     minPrice: '',
     maxPrice: '',
     location: '',
+    sort: '',
   });
+  const handleFilterChange = e => {
+    const { value } = e.target;
+    const newFilters = { ...filters, sort: value };
+    setFilters(newFilters);
+  };
 
   const { data: categoriesData = [] } = useQuery({
     queryKey: ['categories'],
@@ -143,21 +49,21 @@ const Properties = () => {
   } = useQuery({
     queryKey: ['listings', filters],
     queryFn: () => getFilteredListings(filters),
+    onError: err => {
+      toast.error(err.message || 'Something went wrong!');
+    },
   });
 
-  const mainHeadingStyle =
-    'text-4xl md:text-5xl font-extrabold text-secondary text-center mb-4';
-  const highlightStyle = 'text-primary';
-
   return (
-    <div className="min-h-screen max-w-7xl mx-auto bg-base-200">
-      <div className="mt-6">
-        <h2 className={mainHeadingStyle}>
-          All Available <span className={highlightStyle}>Properties</span>
-        </h2>
-        <p className="text-center text-gray-600 mb-12 text-lg">
-          Browse the complete list of rentals, sales, and commercial listings.
-        </p>
+    <div className=" max-w-7xl mx-auto bg-base-200">
+      <div className="mt-10">
+        <Heading
+          title={'All Available'}
+          highlight={'Properties'}
+          subtitle={
+            ' Browse the complete list of rentals, sales, and commercial listings.'
+          }
+        ></Heading>
         <SearchFilter
           onFilterChange={setFilters}
           categoriesData={categoriesData}
@@ -166,14 +72,69 @@ const Properties = () => {
         ></SearchFilter>
       </div>
 
-      <aside className="lg:col-span-3  mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-
-          
-          {listings.map(listing => (
-            <ListingCard key={listing.id} listing={listing} />
-          ))}
+      <aside className="lg:col-span-3  mx-auto px-4 py-8 md:py-16">
+        <div className="mb-8 px-4 py-2 flex flex-col md:flex-row justify-between items-center bg-base-200 rounded-xl shadow-2xl border-b-4 border-primary/100">
+          <div>
+            <h2 className="text-xl md:text-2xl mb-3.5 md:mb-0 text-secondary font-bold">
+              Properties (<span>{listings.length}</span>)
+            </h2>
+          </div>
+          <div className="flex items-center justify-end">
+            <label className="label mr-5">
+              <span className="label-text font-medium text-secondary">
+                Sort By
+              </span>
+            </label>
+            <select
+              name="sort"
+              className="select select-bordered w-2/3 focus:border-primary focus:ring-primary"
+              value={filters.sort}
+              onChange={handleFilterChange}
+            >
+              <option value="default">Default</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="latest">Latest</option>
+            </select>
+          </div>
         </div>
+        {isFetching || isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <MyListingSkeleton key={i} />
+            ))}
+          </div>
+        ) : listings.length === 0 ? (
+          <div className="text-center py-20 bg-base-200 min-h-[50vh]">
+            <h2 className="text-4xl font-extrabold text-secondary md:text-5xl">
+              No Properties <span className="text-error">Found</span>
+            </h2>
+            <p className="text-xl text-gray-600 my-4">
+              There are no properties are added.
+            </p>
+            {user ? (
+              <Link to="/add-property" className="btn btn-primary btn-lg">
+                Add Your Property
+              </Link>
+            ) : (
+              <div>
+                <p className="text-gray-600 my-2">
+                  Please login to add your propertie
+                </p>{' '}
+                <Link className="underline text-primary" to={'/login'}>
+                  Login Here
+                </Link>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+            {listings.map(listing => (
+              <PropertiesCard key={listing._id} listing={listing} />
+            ))}
+          </div>
+        )}
+
         <div className="text-center mt-16">
           <div className="join">
             <button className="join-item btn btn-primary btn-outline">«</button>

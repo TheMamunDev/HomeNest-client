@@ -34,7 +34,6 @@ export const fetchListingDetails = async id => {
 export const fetchRatings = async id => {
   try {
     const result = await api.get(`/ratings/${id}`);
-    console.log(id);
     return result.data;
   } catch (error) {
     console.log(error);
@@ -68,7 +67,8 @@ export const getFilteredListings = async filters => {
   if (filters.minPrice) params.append('minPrice', filters.minPrice);
   if (filters.maxPrice) params.append('maxPrice', filters.maxPrice);
   if (filters.location) params.append('location', filters.location);
-  console.log(params);
+  if (filters.sort) params.append('sort', filters.sort);
+  // console.log(params);
   const { data } = await api.get(`/listings?${params.toString()}`);
   return data;
 };

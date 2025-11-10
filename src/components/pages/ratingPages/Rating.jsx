@@ -16,12 +16,11 @@ const Rating = ({ property }) => {
   const [form, setForm] = useState(null);
   const [myRating, setMyRating] = useState(0);
   const [myReviewText, setMyReviewText] = useState('');
-  const highlightStyle = 'text-primary';
 
   const addReview = useMutation({
     mutationFn: data => insertRating(data),
     onSuccess: (res, data) => {
-      console.log(data, res);
+      // console.log(data, res);
       queryClient.setQueryData(['all-ratings', property._id], oldData => {
         return [...oldData, data];
       });
@@ -31,6 +30,10 @@ const Rating = ({ property }) => {
         });
         form.target.reset();
       }
+    },
+    onError: error => {
+      toast.error('Data Inserting Failed !');
+      console.log(error);
     },
   });
   if (isLoading) {
@@ -64,17 +67,17 @@ const Rating = ({ property }) => {
 
   return (
     <section
-      className="flex flex-col md:flex-row gap-6 justify-between items-center mt-12 max-w-7xl mx-auto p-6 bg-base-100 rounded-lg shadow-xl border border-gray-200"
+      className="flex flex-col md:flex-row gap-8 justify-between items-center mt-12 max-w-7xl mx-auto p-6 bg-base-100 rounded-lg shadow-xl border border-gray-200"
       data-aos="fade-up"
     >
       <div className="flex-1 w-full">
         <div className="flex justify-between items-center">
           <h3 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 border-b pb-3">
-            Ratings & <span className={highlightStyle}>Reviews</span>
+            Ratings & <span className="text-primary">Reviews</span>
           </h3>
         </div>
         <div className="space-y-6 mb-10">
-          {reviewData.length === 0 ? (
+          {reviewData?.length === 0 ? (
             <div className="alert alert-info text-secondary bg-accent/20">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +97,7 @@ const Rating = ({ property }) => {
               </span>
             </div>
           ) : (
-            reviewData.map(review => (
+            reviewData?.map(review => (
               <div key={review._id} className="border-b border-gray-100 pb-4">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="avatar">
