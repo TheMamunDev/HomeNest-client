@@ -11,7 +11,7 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-import { updateListing } from '../../../Api/api';
+import { deleteListing, updateListing } from '../../../Api/api';
 import Swal from 'sweetalert2';
 
 const MyListingCard = ({ listing }) => {
@@ -61,7 +61,6 @@ const MyListingCard = ({ listing }) => {
       });
       if (data.data.modifiedCount) {
         toast.success('Property Updated Successfull');
-        QueryClient.invalidateQueries(['my-listing']);
       }
     },
   });
@@ -80,8 +79,17 @@ const MyListingCard = ({ listing }) => {
   };
 
   const deleteLM = useMutation({
-    mutationFn: () => deleteListing()
-  })
+    mutationFn: id => deleteListing(id),
+    onSuccess: (res, data) => {
+      console.log(data, res);
+      queryClient.setQueryData(['my-listing'], prevData => {
+        return prevData.filter(item => item._id !== data);
+      });
+      if (data.data.deletedCount) {
+        toast.error(`Successfully deleted ${listing.propertyName}`);
+      }
+    },
+  });
 
   const handleDelete = () => {
     Swal.fire({
@@ -94,8 +102,7 @@ const MyListingCard = ({ listing }) => {
       confirmButtonText: 'Yes, delete it!',
     }).then(result => {
       if (result.isConfirmed) {
-
-
+        deleteLM.mutate(id);
         toast.error(`Listing "${listing.propertyName}" has been deleted.`, {
           position: 'top-center',
         });
