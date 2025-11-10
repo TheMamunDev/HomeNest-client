@@ -6,41 +6,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { fetchRatings, insertRating } from '../../../Api/api';
 import Spinner from '../../common/Spinner';
 
-const mockReviews = [
-  {
-    id: 1,
-    userId: 'user-1',
-    name: 'Sarah J.',
-    rating: 5,
-    review:
-      'Excellent property! The location is superb and the owner was very responsive. Highly recommend HomeNest for finding quality rentals.',
-    date: '2025-10-25',
-  },
-  {
-    id: 2,
-    userId: 'user-def-456',
-    name: 'Mike T.',
-    rating: 4,
-    review:
-      'The home was as described, though the backyard needs a little work. Overall a smooth transaction and fair price.',
-    date: '2025-10-20',
-  },
-  {
-    id: 3,
-    userId: 'user-ghi-789',
-    name: 'Community Living Trust',
-    rating: 5,
-    review:
-      'Fantastic commercial opportunity. Prime location in the downtown core. Five stars for investment potential!',
-    date: '2025-09-15',
-  },
-];
-
 const Rating = ({ property }) => {
   const { user } = useContext(AuthContext);
   const { data: reviewData, isLoading } = useQuery({
-    queryKey: ['all-ratings'],
-    queryFn: fetchRatings,
+    queryKey: ['all-ratings', property._id],
+    queryFn: () => fetchRatings(property._id),
   });
   const queryClient = useQueryClient();
   const [form, setForm] = useState(null);
@@ -52,7 +22,7 @@ const Rating = ({ property }) => {
     mutationFn: data => insertRating(data),
     onSuccess: (res, data) => {
       console.log(data, res);
-      queryClient.setQueryData(['all-ratings'], oldData => {
+      queryClient.setQueryData(['all-ratings', property._id], oldData => {
         return [...oldData, data];
       });
       if (data.insertedId) {
@@ -94,7 +64,7 @@ const Rating = ({ property }) => {
 
   return (
     <section
-      className="flex flex-col md:flex-row justify-between items-center mt-12 max-w-7xl mx-auto p-6 bg-base-100 rounded-lg shadow-xl border border-gray-200"
+      className="flex flex-col md:flex-row gap-6 justify-between items-center mt-12 max-w-7xl mx-auto p-6 bg-base-100 rounded-lg shadow-xl border border-gray-200"
       data-aos="fade-up"
     >
       <div className="flex-1 w-full">

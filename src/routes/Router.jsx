@@ -9,6 +9,7 @@ import AddProperty from '../components/pages/listingPages/AddProperty';
 import MyProperty from '../components/pages/listingPages/MyProperty';
 import PropertyDetailsPage from '../components/pages/listingPages/PropertyDetailsPage';
 import MyRatings from '../components/pages/ratingPages/MyRatings';
+import Properties from '../components/pages/listingPages/Properties';
 
 export const Router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const Router = createBrowserRouter([
       {
         path: 'signup',
         Component: Register,
+      },
+      {
+        path: 'properties',
+        Component: Properties,
       },
       {
         path: 'add-property',

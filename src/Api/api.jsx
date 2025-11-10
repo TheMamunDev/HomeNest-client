@@ -31,13 +31,46 @@ export const fetchListingDetails = async id => {
   }
 };
 
-export const fetchRatings = async () => {
+export const fetchRatings = async id => {
   try {
-    const result = await api.get('/ratings');
+    const result = await api.get(`/ratings/${id}`);
+    console.log(id);
     return result.data;
   } catch (error) {
     console.log(error);
   }
+};
+
+export const fetchMyRatings = async email => {
+  try {
+    const result = await api.get(`/my-ratings?email=${email}`);
+    return result.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getCategories = async () => {
+  const { data } = await api.get('/categories');
+  return data;
+};
+
+export const getPriceRange = async () => {
+  const { data } = await api.get('/price-range');
+  return data;
+};
+
+export const getFilteredListings = async filters => {
+  const params = new URLSearchParams();
+
+  if (filters.category && filters.category !== 'All')
+    params.append('category', filters.category);
+  if (filters.minPrice) params.append('minPrice', filters.minPrice);
+  if (filters.maxPrice) params.append('maxPrice', filters.maxPrice);
+  if (filters.location) params.append('location', filters.location);
+  console.log(params);
+  const { data } = await api.get(`/listings?${params.toString()}`);
+  return data;
 };
 
 export const insertListing = async data => {

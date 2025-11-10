@@ -37,7 +37,11 @@ const AddProperty = () => {
     setForm(e);
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    const finalData = { ...data, createdAt: new Date().toISOString() };
+    const finalData = {
+      ...data,
+      price: Number(data.price),
+      createdAt: new Date().toISOString(),
+    };
     insertData.mutate(finalData);
   };
 
