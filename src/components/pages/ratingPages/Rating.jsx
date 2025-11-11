@@ -72,7 +72,7 @@ const Rating = ({ property }) => {
     >
       <div className="flex-1 w-full">
         <div className="flex justify-between items-center">
-          <h3 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 border-b pb-3">
+          <h3 className="text-2xl md:text-3xl font-extrabold text-secondary mb-6 border-b pb-3">
             Ratings & <span className="text-primary">Reviews</span>
           </h3>
         </div>
@@ -125,7 +125,7 @@ const Rating = ({ property }) => {
                       type="radio"
                       name={`rating-${review.id}`}
                       className={`mask mask-star-2 ${
-                        i <= review.rating ? 'bg-primary' : 'bg-gray-300'
+                        i <= review.rating ? 'bg-neutral' : 'bg-gray-300'
                       }`}
                       checked={i === review.rating}
                       readOnly
@@ -172,7 +172,7 @@ const Rating = ({ property }) => {
                     </span>
                   </label>
                   <textarea
-                    className="textarea textarea-bordered h-24 focus:border-primary focus:ring-primary"
+                    className="textarea textarea-bordered border-gray-200 text-neutral  h-24 focus:border-primary focus:ring-primary"
                     placeholder="Share your experience "
                     value={myReviewText}
                     onChange={e => setMyReviewText(e.target.value)}

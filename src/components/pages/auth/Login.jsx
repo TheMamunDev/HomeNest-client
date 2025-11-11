@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { FaLock } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { handleFirebaseError } from '../../../utilis/firebaseErrorHandle';
@@ -19,7 +19,7 @@ const Login = () => {
       navigate(from, { replace: true });
     }
   }, [user, navigate, from]);
-  console.log(from);
+  // console.log(from);
   if (loading) {
     return <Spinner></Spinner>;
   }
@@ -60,23 +60,23 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center p-4 md:p-10 bg-gray-50">
+    <div className="min-h-[70vh] flex items-center justify-center p-4 md:p-10 ">
       <div
-        className="w-full max-w-md bg-white p-8 rounded-lg shadow-2xl border border-gray-200"
+        className="w-full max-w-md  p-8 rounded-lg shadow-2xl border border-gray-200"
         data-aos="fade-up"
         data-aos-delay="100"
       >
-        <h2 className="main-heading text-center mb-2">
+        <h2 className="text-3xl font-extrabold text-secondary md:text-4xl text-center mb-2">
           Login to <span className="text-primary">HomeNest</span>
         </h2>
 
-        <p className="text-center text-gray-600 mb-8">
+        <p className="text-center text-base-300 mb-8">
           Access your account to manage your listings and profile.
         </p>
         <form onSubmit={handleLogin} className="space-y-6">
-          <div className="form-control">
+          <div className="form-control ">
             <label className="label">
-              <span className="label-text font-medium text-gray-700">
+              <span className="label-text font-medium text-base-300">
                 Email Address
               </span>
             </label>
@@ -84,21 +84,27 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="you@example.com"
-              className="input input-bordered w-full focus:border-primary focus:ring-primary"
+              className="input-field input-bordered"
               required
             />
           </div>
 
           <div className="form-control relative">
-            <label className="input validator w-full">
-              <FaLock size={18} className="text-gray-500" />
+            <label className="label">
+              <span className="label-text font-medium text-base-300">
+                Password
+              </span>
+            </label>
+            <label className="input validator border border-gray-200 w-full">
+              <FaLock size={18} className="text-gray-500 " />
               <input
                 type={showPass ? 'text' : 'password'}
                 name="password"
                 required
+                className="input-field input-bordered"
                 placeholder="Password"
               />
-              <button onClick={showPassHandle}>
+              <button className="text-base-300" onClick={showPassHandle}>
                 {showPass ? <IoIosEyeOff /> : <IoIosEye />}
               </button>
             </label>
@@ -119,7 +125,7 @@ const Login = () => {
           </div>
           <div className="flex items-center justify-center gap-2">
             <div className="h-px w-full bg-[#059669]"></div>
-            <span className="text-sm text-black opacity-50">or</span>
+            <span className="text-sm text-neutral opacity-50">or</span>
             <div className="h-px w-full bg-[#059669]"></div>
           </div>
           <button
@@ -158,7 +164,7 @@ const Login = () => {
         </form>
 
         <div className="text-center mt-6">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-base-300">
             Don't have an account?
             <Link
               to="/signup"

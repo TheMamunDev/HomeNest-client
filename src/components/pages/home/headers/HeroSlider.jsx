@@ -4,8 +4,6 @@ import { Link } from 'react-router';
 const HeroSlider = () => {
   const slideHeadingStyle =
     'text-5xl md:text-7xl font-extrabold text-white leading-tight drop-shadow-lg';
-  const highlightStyle =
-    'text-primary bg-secondary/80 p-1 rounded-lg inline-block';
   const subTextStyle =
     'text-xl md:text-3xl font-medium text-white drop-shadow-md mt-4 mb-8';
   const image2 =
@@ -81,7 +79,7 @@ const HeroSlider = () => {
                 className="w-full object-cover "
                 style={{ objectPosition: slide.bgPos }}
               />
-              <div className="absolute inset-0 bg-secondary/40 flex items-center justify-center p-4">
+              <div className="absolute inset-0 bg-success/40 flex items-center justify-center p-4">
                 <div
                   className="text-center"
                   data-aos="fade-up"
@@ -89,7 +87,7 @@ const HeroSlider = () => {
                 >
                   <h1 className={slideHeadingStyle}>
                     {slide.headline} <br />
-                    <span className="text-white-400 bg-secondary/80 p-1 rounded-lg inline-block">
+                    <span className="text-white-400 bg-success/80 p-1 rounded-lg inline-block">
                       {slide.highlight}
                     </span>
                   </h1>

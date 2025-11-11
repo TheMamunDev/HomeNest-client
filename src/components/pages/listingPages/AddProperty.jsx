@@ -5,8 +5,11 @@ import { AuthContext } from '../../../contexts/AuthContext';
 import Spinner from '../../common/Spinner';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import { insertListing } from '../../../Api/api';
+import useTitle from '../../../Hooks/useTitle';
+import Swal from 'sweetalert2';
 
 const AddProperty = () => {
+  useTitle('Add Property');
   const [form, setForm] = useState(null);
   const { user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -23,11 +26,25 @@ const AddProperty = () => {
 
   const insertData = useMutation({
     mutationFn: data => insertListing(data),
-    onSuccess: data => {
-      console.log(data);
+    onSuccess: (data, insertedData) => {
+      // console.log(data, insertedData);
       if (data.insertedId) {
         toast.success('Property Added Successfull');
         form.target.reset();
+        Swal.fire({
+          title: `"${insertedData.propertyName}" Property Added Success `,
+          text: 'See in my property page!',
+          icon: 'success',
+          showCancelButton: true,
+          confirmButtonColor: '#03C988',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Procced',
+          cancelButtonText: 'Add Another One',
+        }).then(result => {
+          if (result.isConfirmed) {
+            navigate('/my-properties');
+          }
+        });
       }
     },
   });
@@ -49,10 +66,10 @@ const AddProperty = () => {
     <div className="py-12 bg-base-200 min-h-screen" data-aos="fade-in">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-base-100 p-8 md:p-12 rounded-lg shadow-2xl border border-gray-200">
-          <h2 className="main-heading text-center mb-2">
+          <h2 className="text-3xl font-extrabold md:text-4xl text-secondary text-center mb-2">
             Add Your <span className="text-primary">Property Listing</span>
           </h2>
-          <p className="text-center text-gray-600 mb-10 text-lg">
+          <p className="text-center text-base-300 mb-10 text-lg">
             Fill out the details below to list your property for rent or sale.
           </p>
           <form onSubmit={handleSubmitListing} className="space-y-6">
@@ -96,7 +113,7 @@ const AddProperty = () => {
                 type="text"
                 name="propertyName"
                 placeholder="e.g., Luxury Condo, Vintage Home"
-                className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                className="input input-bordered border-gray-200 text-neutral w-full focus:border-primary focus:ring-primary"
                 required
               />
             </div>
@@ -109,7 +126,7 @@ const AddProperty = () => {
               <textarea
                 name="description"
                 placeholder="Provide a detailed description of the property, features, and amenities..."
-                className="textarea textarea-bordered h-32 w-full focus:border-primary focus:ring-primary"
+                className="textarea border-gray-200 text-neutral textarea-bordered h-32 w-full focus:border-primary focus:ring-primary"
                 required
               ></textarea>
             </div>
@@ -122,7 +139,7 @@ const AddProperty = () => {
                 </label>
                 <select
                   name="category"
-                  className="select select-bordered w-full focus:border-primary focus:ring-primary"
+                  className="select select-bordered  border-gray-200 text-neutral w-full focus:border-primary focus:ring-primary"
                   required
                 >
                   <option value="" disabled>
@@ -145,7 +162,7 @@ const AddProperty = () => {
                   type="number"
                   name="price"
                   placeholder="e.g., 550000 or 2500"
-                  className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                  className="input input-bordered w-full focus:border-primary border-gray-200 text-neutral focus:ring-primary"
                   required
                   min="100"
                 />
@@ -160,7 +177,7 @@ const AddProperty = () => {
                   type="text"
                   name="location"
                   placeholder="City, Area, or Full Address"
-                  className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                  className="input border-gray-200 text-neutral input-bordered w-full focus:border-primary focus:ring-primary"
                   required
                 />
               </div>
@@ -175,7 +192,7 @@ const AddProperty = () => {
                 type="url"
                 name="imageLink"
                 placeholder="https://placehold.co/800x600"
-                className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                className="input border-gray-200 text-neutral input-bordered w-full focus:border-primary focus:ring-primary"
                 required
               />
             </div>

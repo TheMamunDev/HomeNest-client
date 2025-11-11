@@ -7,6 +7,18 @@ import MyLink from './MyLink';
 const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    const html = document.querySelector('html');
+    html.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const handleTheme = checked => {
+    setTheme(checked ? 'homenestDark' : 'light');
+  };
+
   useEffect(() => {
     if (user) {
       setIsLoggedIn(true);
@@ -48,7 +60,7 @@ const Navbar = () => {
       )}
     </>
   );
-  // console.log(user);
+
   const authUI = loading ? (
     <span> Loading......</span>
   ) : isLoggedIn ? (
@@ -58,7 +70,7 @@ const Navbar = () => {
         role="button"
         className="btn btn-ghost btn-circle avatar transition-transform duration-300 hover:scale-105"
       >
-        <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+        <div className="w-10 rounded-full ring ring-primary ring-offset-secondary ring-offset-2">
           <img
             alt={user?.displayName}
             src={user?.photoURL || 'https://i.pravatar.cc/150?img=50'}
@@ -70,17 +82,17 @@ const Navbar = () => {
         tabIndex={0}
         className="menu menu-sm dropdown-content mt-3 z-[1] p-3 shadow-xl bg-base-100 rounded-box w-64 border border-gray-100"
       >
-        <li className="px-4 py-2 border-b border-gray-100">
-          <span className="font-bold text-lg text-gray-900">
+        <li className=" py-2 border-b border-gray-100">
+          <span className="font-bold text-lg text-secondary">
             {user?.displayName}
           </span>
-          <span className="text-xs text-gray-500 truncate mt-[-5px]">
+          <span className="text-xs text-base-300 truncate mt-[-5px]">
             {user?.email}
           </span>
         </li>
         <li>
           <button
-            className="btn btn-sm btn-ghost w-full justify-start text-red-500 hover:bg-red-50"
+            className="btn btn-sm btn-ghost w-full  text-sm justify-start text-red-500 hover:bg-red-50"
             onClick={handleLogOut}
           >
             Log out
@@ -112,7 +124,11 @@ const Navbar = () => {
     >
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost lg:hidden hover:bg-transparent"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -130,7 +146,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52 text-neutral"
           >
             {navLinks}
           </ul>
@@ -144,6 +160,12 @@ const Navbar = () => {
             Home<span className="text-primary">Nest</span>
           </span>
         </Link>
+        <input
+          onChange={e => handleTheme(e.target.checked)}
+          type="checkbox"
+          defaultChecked={localStorage.getItem('theme') === 'homenestDark'}
+          className="toggle"
+        />
       </div>
 
       <div className="navbar-center hidden lg:flex">

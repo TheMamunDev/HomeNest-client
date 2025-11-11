@@ -37,11 +37,11 @@ const PropertiesCard = ({ listing }) => {
             <FaDollarSign className="w-5 h-5 text-primary" /> {formattedPrice}
           </div>
 
-          <p className="flex items-center text-gray-600 mb-3 text-sm">
+          <p className="flex items-center text-base-300 mb-3 text-sm">
             <FaLocationDot className="w-4 h-4 mr-1" /> {listing.location}
           </p>
 
-          <p className="text-sm text-gray-700 mt-2">
+          <p className="text-sm text-base-300 mt-2">
             Posted by:{' '}
             <span className="font-semibold text-secondary">{listing.name}</span>
           </p>

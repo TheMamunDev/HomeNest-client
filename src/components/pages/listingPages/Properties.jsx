@@ -19,18 +19,21 @@ const Properties = () => {
   useTitle('Properties');
   const { user } = useContext(AuthContext);
   const [sortBy, setSortBy] = useState('Default');
+  const [pageNumber, setPageNumber] = useState(0);
+  const limit = 9;
 
   const [filters, setFilters] = useState({
     category: 'All',
     minPrice: '',
     maxPrice: '',
-    location: '',
+    propertyName: '',
     sort: sortBy,
+    _start: pageNumber,
   });
   useEffect(() => {
-    const update = { ...filters, sort: sortBy };
+    const update = { ...filters, sort: sortBy, _start: pageNumber };
     setFilters(update);
-  }, [sortBy]);
+  }, [sortBy, pageNumber]);
   const handleFilterChange = e => {
     const { value } = e.target;
     setSortBy(value);
@@ -46,18 +49,16 @@ const Properties = () => {
     queryFn: getPriceRange,
   });
 
-  const {
-    data: listings = [],
-    isLoading,
-    isFetching,
-  } = useQuery({
+  const { data, isLoading, isFetching, isError, error } = useQuery({
     queryKey: ['listings', filters],
     queryFn: () => getFilteredListings(filters),
     onError: err => {
       toast.error(err.message || 'Something went wrong!');
     },
   });
-
+  const listings = data?.data || [];
+  const totalCount = data?.total || 0;
+  console.log(totalCount);
   return (
     <div className=" max-w-7xl mx-auto bg-base-200">
       <div className="mt-10">
@@ -69,19 +70,21 @@ const Properties = () => {
           }
         ></Heading>
         <SearchFilter
-          onFilterChange={setFilters}
+          setFilters={setFilters}
           categoriesData={categoriesData}
           priceRange={priceRange}
           isFetching={isFetching}
           sortBy={sortBy}
+          filters={filters}
+          setPageNumber={setPageNumber}
         ></SearchFilter>
       </div>
 
       <aside className="lg:col-span-3  mx-auto px-4 py-8 md:py-16">
-        <div className="mb-8 px-4 py-2 flex flex-col md:flex-row justify-between items-center bg-base-200 rounded-xl shadow-2xl border-b-4 border-primary/100">
+        <div className="mb-8 px-4 py-2 flex flex-col md:flex-row justify-between items-center bg-base-200 rounded-xl shadow-2xl border-t-4 border-primary/100">
           <div>
             <h2 className="text-xl md:text-2xl mb-3.5 md:mb-0 text-secondary font-bold">
-              Properties (<span>{listings.length}</span>)
+              All Properties
             </h2>
           </div>
           <div className="flex items-center justify-end">
@@ -92,7 +95,7 @@ const Properties = () => {
             </label>
             <select
               name="sort"
-              className="select select-bordered w-2/3 focus:border-primary focus:ring-primary"
+              className="select select-bordered border-gray-200 text-neutral w-2/3 focus:border-primary focus:ring-primary"
               defaultValue={filters.sort}
               onChange={handleFilterChange}
             >
@@ -134,7 +137,7 @@ const Properties = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-            {listings.map(listing => (
+            {listings?.map(listing => (
               <PropertiesCard key={listing._id} listing={listing} />
             ))}
           </div>
@@ -142,9 +145,23 @@ const Properties = () => {
 
         <div className="text-center mt-16">
           <div className="join">
-            <button className="join-item btn btn-primary btn-outline">«</button>
-            <button className="join-item btn btn-primary">Page 1</button>
-            <button className="join-item btn btn-primary btn-outline">»</button>
+            <button
+              disabled={pageNumber === 0 ? true : false}
+              onClick={() => setPageNumber(prev => prev - limit)}
+              className="join-item btn btn-primary btn-outline"
+            >
+              « Prev
+            </button>
+            <button className="join-item btn btn-primary">
+              {pageNumber / limit}
+            </button>
+            <button
+              disabled={pageNumber + limit >= totalCount}
+              onClick={() => setPageNumber(prev => prev + limit)}
+              className="join-item btn btn-primary btn-outline"
+            >
+              Next »
+            </button>
           </div>
         </div>
       </aside>

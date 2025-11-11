@@ -11,7 +11,7 @@ const ListingCard = ({ listing }) => {
 
   return (
     <div
-      className="card w-full h-full bg-base-100 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100"
+      className="card w-full h-full bg-base-200 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 border border-gray-100"
       data-aos="fade-up"
     >
       <figure className="aspect-video w-full">
@@ -25,7 +25,7 @@ const ListingCard = ({ listing }) => {
       <div className="card-body p-5 flex flex-col justify-between">
         <div>
           <div className="flex justify-between items-start mb-2">
-            <h2 className="card-title text-xl text-secondary">
+            <h2 className="card-title text-xl text-secondary-content">
               {listing.propertyName}
             </h2>
             <div className="badge badge-accent text-xs font-semibold uppercase">
@@ -33,15 +33,15 @@ const ListingCard = ({ listing }) => {
             </div>
           </div>
 
-          <div className="text-lg font-bold text-primary mb-2 flex items-center gap-1">
+          <div className="text-lg font-bold text-accent mb-2 flex items-center gap-1">
             <AiFillDollarCircle className="w-5 h-5 text-primary" />
             {formattedPrice}
           </div>
-          <p className="flex items-center text-gray-600 mb-3 text-sm">
+          <p className="flex items-center text-base-300 mb-3 text-sm">
             <FaLocationDot className="w-4 h-4 mr-1" />
             {listing.location}
           </p>
-          <p className="text-gray-700 text-sm mb-4 line-clamp-3">
+          <p className="text-base-300 text-sm mb-4 line-clamp-3">
             {listing.description}
           </p>
         </div>

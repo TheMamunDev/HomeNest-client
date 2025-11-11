@@ -28,7 +28,7 @@ const RatingCard = ({ rating }) => {
           <h3 className="card-title text-2xl text-secondary">
             {rating.propertyName}
           </h3>
-          <span className="text-sm text-gray-500 font-medium">
+          <span className="text-sm text-neutral font-medium">
             Reviewed: {new Date(rating.reviewed).toLocaleDateString()}
           </span>
         </div>
@@ -39,15 +39,15 @@ const RatingCard = ({ rating }) => {
               <div
                 key={i}
                 className={`mask mask-star-2 w-5 h-5 ${
-                  i < rating.rating ? 'bg-primary' : 'bg-gray-400'
+                  i < rating.rating ? 'bg-success' : 'bg-gray-400'
                 }`}
               ></div>
             ))}
           </div>
-          <span className="text-primary font-bold">({rating.rating} / 5)</span>
+          <span className="text-base-300 font-bold">({rating.rating} / 5)</span>
         </div>
-        <p className="text-gray-700 italic mb-4">"{rating.review}"</p>
-        <p className="text-sm font-semibold text-gray-800 border-t pt-2 mt-2">
+        <p className="text-base-300 italic mb-4">"{rating.review}"</p>
+        <p className="text-sm font-semibold text-base-300 border-t pt-2 mt-2">
           Reviewer: <span className="text-primary">{rating.reviewerName}</span>
         </p>
         <div className="card-actions justify-end mt-4">

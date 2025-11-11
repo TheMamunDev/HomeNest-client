@@ -26,7 +26,7 @@ const serviceData = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 bg-base-200" data-aos="fade-up">
+    <section className="py-16 bg-base-200">
       <div className="container mx-auto px-4 max-w-7xl">
         <Heading
           title={'Why Choose'}
@@ -35,11 +35,11 @@ const WhyChooseUs = () => {
             'We combine advanced technology with human expertise to make finding or selling your property simpler, faster, and more reliable.'
           }
         ></Heading>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 ">
           {serviceData.map((service, index) => (
             <div
               key={index}
-              className="text-center p-6 bg-[#FAF9F6] rounded-xl shadow-lg border border-primary/20 transition-all duration-300 hover:shadow-2xl"
+              className="text-center p-6 bg-base-200 rounded-xl shadow-lg border border-gray-100 transition-all duration-300 hover:shadow-2xl"
               data-aos="zoom-in"
               data-aos-delay={index * 150 + 100}
             >
@@ -49,7 +49,7 @@ const WhyChooseUs = () => {
               <h3 className="text-2xl font-bold text-secondary mb-3">
                 {service.title}
               </h3>
-              <p className="text-gray-700 text-base">{service.description}</p>
+              <p className="text-base-300 text-base">{service.description}</p>
             </div>
           ))}
         </div>

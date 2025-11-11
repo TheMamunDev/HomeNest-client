@@ -49,12 +49,6 @@ const PropertyDetailsPage = () => {
     );
   }
 
-  const postedDate = new Date(property.createdAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-
   return (
     <div className="py-12 bg-base-200" data-aos="fade-in">
       <div className="container mx-auto px-4 max-w-7xl">
@@ -70,16 +64,16 @@ const PropertyDetailsPage = () => {
                   'https://placehold.co/1200x600/cccccc/000000?text=Image+Unavailable';
               }}
             />
-            <div className="absolute top-0 left-0 bg-secondary/80 text-white p-3 rounded-br-lg font-semibold text-lg">
+            <div className="absolute top-0 left-0 bg-success/80 text-white p-3 rounded-br-lg font-semibold text-lg">
               {property.category}
             </div>
           </figure>
           <div className="p-6 md:p-10">
-            <h1 className="text-3xl font-extrabold text-secondary md:text-5xl mb-2">
+            <h1 className="text-3xl font-extrabold text-secondary-content md:text-4xl mb-2">
               {property.propertyName}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-lg font-medium text-gray-700 mt-4 border-b pb-4 mb-4">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-lg font-medium text-base-300 mt-4 border-b pb-4 mb-4">
               <p className="flex items-center text-2xl font-bold text-primary">
                 <FaDollarSign className="w-6 h-6 mr-2" />{' '}
                 {useFormatePrice(property)}
@@ -93,7 +87,7 @@ const PropertyDetailsPage = () => {
             <h2 className="text-2xl font-bold text-secondary mt-6 mb-3">
               Description
             </h2>
-            <p className="text-gray-700 leading-relaxed text-base">
+            <p className="text-base-300 leading-relaxed text-base">
               {property.description}
             </p>
           </div>

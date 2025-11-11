@@ -48,7 +48,7 @@ const MyRatings = () => {
           'Manage all your submitted reviews for properties on HomeNest.'
         }
       ></Heading>
-      <div className="space-y-8 max-w-4xl mx-auto">
+      <div className=" max-w-4xl mx-auto">
         {isFetching || isLoading ? (
           <div>
             {Array.from({ length: 4 }).map((_, i) => (
@@ -56,7 +56,7 @@ const MyRatings = () => {
             ))}
           </div>
         ) : (
-          <div>
+          <div className="space-y-8">
             {userRatings?.map(rating => (
               <RatingCard key={rating._id} rating={rating} />
             ))}

@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from 'react';
 import Spinner from '../../common/Spinner';
 import { FaDollarSign, FaSearch } from 'react-icons/fa';
 
 const SearchFilter = ({
-  onFilterChange,
+  setFilters,
   categoriesData,
   priceRange,
   isFetching,
-  sortBy,
+  filters,
+  setPageNumber,
 }) => {
-  const [filters, setFilters] = useState({
-    category: 'All',
-    minPrice: '',
-    maxPrice: '',
-    location: '',
-    sort: sortBy,
-  });
-  useEffect(() => {
-    setFilters(prev => ({ ...prev, sort: sortBy }));
-  }, [sortBy]);
-
   const handleFilterChange = e => {
     const { name, value } = e.target;
     const newFilters = { ...filters, [name]: value };
+    setPageNumber(0);
     setFilters(newFilters);
-    onFilterChange(newFilters);
   };
+  // console.log(filters);
   return (
     <div className="py-12 px-4 md:px-8 bg-base-200" data-aos="fade-up">
       <div className="max-w-6xl mx-auto">
@@ -37,16 +27,16 @@ const SearchFilter = ({
             <div className="form-control lg:col-span-2">
               <label className="label">
                 <span className="label-text font-medium text-secondary">
-                  Location / Address
+                  Property Name
                 </span>
               </label>
               <input
                 type="text"
-                name="location"
-                placeholder="Enter city, area, or zip code"
-                className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                name="propertyName"
+                placeholder="Search by Property Name"
+                className="input text-neutral input-bordered border-gray-200 w-full focus:border-primary focus:ring-primary"
                 onChange={handleFilterChange}
-                value={filters.location}
+                value={filters.name}
               />
             </div>
 
@@ -58,7 +48,7 @@ const SearchFilter = ({
               </label>
               <select
                 name="category"
-                className="select select-bordered w-full focus:border-primary focus:ring-primary"
+                className="select select-bordered  border-gray-200 text-neutral w-full focus:border-primary focus:ring-primary"
                 value={filters.category}
                 onChange={handleFilterChange}
               >
@@ -76,13 +66,13 @@ const SearchFilter = ({
                 <span className="label-text font-medium text-secondary">
                   Min Price
                 </span>{' '}
-                <FaDollarSign className="w-4 h-4 text-gray-500" />
+                <FaDollarSign className="w-4 h-4 text-secondary" />
               </label>
               <input
                 type="number"
                 name="minPrice"
                 placeholder={`Min (${priceRange?.minPrice || 0})`}
-                className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                className="input input-bordered border-gray-200 text-neutral w-full focus:border-primary focus:ring-primary"
                 onChange={handleFilterChange}
                 min="0"
                 value={filters.minPrice}
@@ -94,13 +84,13 @@ const SearchFilter = ({
                 <span className="label-text font-medium text-secondary">
                   Max Price
                 </span>{' '}
-                <FaDollarSign className="w-4 h-4 text-gray-500" />
+                <FaDollarSign className="w-4 h-4 text-secondary" />
               </label>
               <input
                 type="number"
                 name="maxPrice"
                 placeholder={`Min (${priceRange?.maxPrice || 0})`}
-                className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                className="input input-bordered text-neutral border-gray-200 w-full focus:border-primary focus:ring-primary"
                 onChange={handleFilterChange}
                 value={filters.maxPrice}
               />
@@ -114,7 +104,10 @@ const SearchFilter = ({
                 Searching....
               </label>
             ) : (
-              <label className="btn btn-primary btn-lg w-full md:w-1/3 mx-auto font-semibold transition duration-300 flex items-center gap-2">
+              <label
+                onClick={() => setPageNumber(0)}
+                className="btn btn-primary btn-lg w-full md:w-1/3 mx-auto font-semibold transition duration-300 flex items-center gap-2"
+              >
                 <FaSearch className="w-5 h-5" />
                 Search Listings
               </label>

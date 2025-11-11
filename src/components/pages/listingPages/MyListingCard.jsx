@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 
 const MyListingCard = ({ listing }) => {
   const id = listing._id;
+  // console.log(listing);
   const navigate = useNavigate();
   const modalRef = useRef();
   const { user } = useContext(AuthContext);
@@ -76,7 +77,13 @@ const MyListingCard = ({ listing }) => {
       location: formData.location,
       imageLink: formData.imageLink,
     };
-    updateData.mutate(updatedData);
+    // console.log(updateData);
+    if (JSON.stringify(updatedData) === JSON.stringify(listing)) {
+      toast.warning('No Changes Found');
+      return;
+    } else {
+      updateData.mutate(updatedData);
+    }
   };
 
   const deleteLM = useMutation({
@@ -169,13 +176,13 @@ const MyListingCard = ({ listing }) => {
         </div>
       </div>
       <dialog ref={modalRef} className="modal">
-        <div className="modal-box w-11/12 max-w-3xl p-0 overflow-hidden">
+        <div className="modal-box w-11/12 max-w-3xl p-0 overflow-y-auto">
           <div className="bg-base-100 p-8">
             <h3 className="font-bold text-2xl text-secondary mb-1">
               Update Listing:{' '}
               <span className="text-primary">{listing.propertyName}</span>
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-base-300 mb-6">
               Review and edit your property details below.
             </p>
 
@@ -221,7 +228,7 @@ const MyListingCard = ({ listing }) => {
                   value={formData.propertyName}
                   onChange={handleChange}
                   placeholder="e.g., Luxury Condo"
-                  className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                  className="input-field input-bordered "
                   required
                 />
               </div>
@@ -236,7 +243,7 @@ const MyListingCard = ({ listing }) => {
                   value={formData.description}
                   onChange={handleChange}
                   placeholder="Provide a detailed description of the property, features, and amenities..."
-                  className="textarea textarea-bordered h-24 w-full focus:border-primary focus:ring-primary"
+                  className="textarea border-gray-200 text-neutral textarea-bordered h-24 w-full focus:border-primary focus:ring-primary"
                   required
                 ></textarea>
               </div>
@@ -251,7 +258,7 @@ const MyListingCard = ({ listing }) => {
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
-                    className="select select-bordered w-full focus:border-primary focus:ring-primary"
+                    className="select border-gray-200 text-neutral select-bordered w-full focus:border-primary focus:ring-primary"
                     required
                   >
                     {categories.map(cat => (
@@ -273,7 +280,7 @@ const MyListingCard = ({ listing }) => {
                     value={formData.price}
                     onChange={handleChange}
                     placeholder="e.g., 550000"
-                    className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                    className="input-field input-bordered "
                     required
                     min="100"
                   />
@@ -290,7 +297,7 @@ const MyListingCard = ({ listing }) => {
                     value={formData.location}
                     onChange={handleChange}
                     placeholder="City, Area, or Full Address"
-                    className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                    className="input-field input-bordered "
                     required
                   />
                 </div>
@@ -307,7 +314,7 @@ const MyListingCard = ({ listing }) => {
                   value={formData.imageLink}
                   onChange={handleChange}
                   placeholder="https://placehold.co/800x600"
-                  className="input input-bordered w-full focus:border-primary focus:ring-primary"
+                  className="input-field input-bordered "
                   required
                 />
               </div>
@@ -315,7 +322,7 @@ const MyListingCard = ({ listing }) => {
                 <button
                   onClick={() => modalRef.current.close()}
                   type="button"
-                  className="btn btn-ghost"
+                  className="btn  text-neutral"
                 >
                   Cancel
                 </button>

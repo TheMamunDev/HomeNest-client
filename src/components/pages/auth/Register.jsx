@@ -93,10 +93,10 @@ const Register = () => {
         data-aos="fade-up"
         data-aos-delay="100"
       >
-        <h2 className="main-heading text-center mb-2">
+        <h2 className="text-3xl font-extrabold text-secondary md:text-4xl text-center mb-2">
           Register for <span className="text-primary">HomeNest</span>
         </h2>
-        <p className="text-center text-gray-600 mb-8">
+        <p className="text-center text-base-300 mb-8">
           Create your account to start listing and finding properties.
         </p>
         <form onSubmit={handleRegister} className="space-y-4">
@@ -110,7 +110,7 @@ const Register = () => {
               type="text"
               name="name"
               placeholder="Your Name"
-              className="input input-bordered w-full focus:border-primary focus:ring-primary"
+              className="input-field input-bordered"
               required
             />
           </div>
@@ -124,7 +124,7 @@ const Register = () => {
               type="email"
               name="email"
               placeholder="you@example.com"
-              className="input input-bordered w-full focus:border-primary focus:ring-primary"
+              className="input-field input-bordered"
               required
             />
           </div>
@@ -134,15 +134,16 @@ const Register = () => {
                 Password
               </span>
             </label>
-            <label className="input validator w-full">
+            <label className="input validator border border-gray-200 w-full">
               <FaLock size={18} className="text-gray-500" />
               <input
                 type={showPass ? 'text' : 'password'}
                 name="password"
                 required
+                className="input-field input-bordered"
                 placeholder="Password"
               />
-              <button onClick={showPassHandle}>
+              <button className="text-base-300" onClick={showPassHandle}>
                 {showPass ? <IoIosEyeOff /> : <IoIosEye />}
               </button>
             </label>
@@ -158,7 +159,7 @@ const Register = () => {
               type="url"
               name="photo"
               placeholder="Enter Your Photo URL"
-              className="input input-bordered w-full focus:border-primary focus:ring-primary"
+              className="input-field input-bordered"
               required
             />
           </div>
@@ -169,7 +170,7 @@ const Register = () => {
                 className="checkbox checkbox-primary"
                 required
               />
-              <span className="label-text text-gray-600">
+              <span className="label-text text-base-300">
                 I agree to the{' '}
                 <Link to="/terms" className="text-primary hover:underline">
                   Terms & Conditions
@@ -187,7 +188,7 @@ const Register = () => {
             </button>
             <div className="flex items-center justify-center gap-2 my-3.5">
               <div className="h-px w-full bg-[#059669]"></div>
-              <span className="text-sm text-black opacity-50">or</span>
+              <span className="text-sm text-neutral opacity-50">or</span>
               <div className="h-px w-full bg-[#059669]"></div>
             </div>
             <button
@@ -230,7 +231,7 @@ const Register = () => {
         </form>
 
         <div className="text-center mt-6">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-base-300">
             Already have an account?
             <Link
               to="/login"

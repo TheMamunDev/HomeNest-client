@@ -61,14 +61,16 @@ export const getPriceRange = async () => {
 
 export const getFilteredListings = async filters => {
   const params = new URLSearchParams();
-
+  params.append('_start', filters._start);
+  params.append('_limit', 9);
   if (filters.category && filters.category !== 'All')
     params.append('category', filters.category);
   if (filters.minPrice) params.append('minPrice', filters.minPrice);
   if (filters.maxPrice) params.append('maxPrice', filters.maxPrice);
-  if (filters.location) params.append('location', filters.location);
+  if (filters.propertyName) params.append('propertyName', filters.propertyName);
   if (filters.sort) params.append('sort', filters.sort);
-  // console.log(params);
+
+  console.log(params.toString());
   const { data } = await api.get(`/listings?${params.toString()}`);
   return data;
 };

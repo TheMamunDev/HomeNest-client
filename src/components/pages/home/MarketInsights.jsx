@@ -25,7 +25,7 @@ const MarketInsights = () => {
   ];
 
   return (
-    <section className="py-16 bg-base-100" data-aos="fade-up">
+    <section className="py-16 bg-base-200/60">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="lg:flex lg:items-center lg:space-x-12">
           <div className="lg:w-5/12 mb-8 lg:mb-0">
@@ -35,15 +35,15 @@ const MarketInsights = () => {
                 Data & Trends
               </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-gray-800 mb-4">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-secondary mb-4">
               Current <span className="text-primary">Market Insights</span>
             </h2>
-            <p className="text-gray-700 text-lg mb-6">
+            <p className="text-base-300 text-lg mb-6">
               Stay ahead of the curve with our live market data. Whether you're
               buying or investing, understanding the latest trends is key to
               making a successful move.
             </p>
-            <ul className="space-y-3 text-gray-700">
+            <ul className="space-y-3 text-base-300">
               <li className="flex items-center">
                 <FaHouseChimney className="w-5 h-5 mr-2 text-primary" /> Expert
                 analysis updated daily.
@@ -58,15 +58,15 @@ const MarketInsights = () => {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="bg-base-200 p-6 rounded-lg shadow-xl border-t-4 border-primary/50"
+                className="bg-base-100 p-6 rounded-lg shadow-xl border-t-4 border-primary/50"
               >
-                <p className="text-sm font-medium text-gray-500 uppercase mb-1">
+                <p className="text-sm font-medium text-base-300 uppercase mb-1">
                   {stat.label}
                 </p>
-                <p className={`text-4xl font-extrabold ${stat.color} mb-3`}>
+                <p className="text-4xl text-primary font-extrabold  mb-3">
                   {stat.value}
                 </p>
-                <p className="text-sm text-gray-600">{stat.desc}</p>
+                <p className="text-sm text-base-300">{stat.desc}</p>
               </div>
             ))}
           </div>
