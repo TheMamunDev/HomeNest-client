@@ -3,6 +3,19 @@ import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import MyLink from './MyLink';
+import { CiHome } from 'react-icons/ci';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+import { Button } from '../ui/button';
+import { Moon, Sun } from 'lucide-react';
+import { FaBarsStaggered } from 'react-icons/fa6';
+import { Badge } from '../ui/badge';
+import { Spinner } from '../ui/spinner';
 
 const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
@@ -15,8 +28,9 @@ const Navbar = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const handleTheme = checked => {
-    setTheme(checked ? 'homenestDark' : 'light');
+  const handleTheme = () => {
+    setTheme(theme === 'light' ? 'homenestDark' : 'light');
+    localStorage.setItem('theme', theme);
   };
 
   useEffect(() => {
@@ -37,32 +51,31 @@ const Navbar = () => {
       });
   };
 
-  const navLinks = (
-    <>
-      <li>
-        <MyLink to="/">Home</MyLink>
-      </li>
-      <li>
-        <MyLink to="/properties">All Properties</MyLink>
-      </li>
-      {isLoggedIn && (
-        <>
-          <li>
-            <MyLink to="/add-property">Add Property</MyLink>
-          </li>
-          <li>
-            <MyLink to="/my-properties">My Properties</MyLink>
-          </li>
-          <li>
-            <MyLink to="/my-ratings">My Ratings</MyLink>
-          </li>
-        </>
-      )}
-    </>
-  );
+  const navLinks = [
+    { label: 'Home', to: '/', icon: <CiHome /> },
+    { label: 'All Properties', to: '/properties', icon: <CiHome /> },
+    {
+      label: 'Add Property',
+      to: '/add-property',
+      icon: <CiHome />,
+      auth: true,
+    },
+    {
+      label: 'My Properties',
+      to: '/my-properties',
+      icon: <CiHome />,
+      auth: true,
+    },
+    { label: 'My Ratings', to: '/my-ratings', icon: <CiHome />, auth: true },
+  ];
 
   const authUI = loading ? (
-    <span> Loading......</span>
+    <div className="flex items-center gap-4 ">
+      <Badge className="text-neutral">
+        <Spinner />
+        Syncing
+      </Badge>
+    </div>
   ) : isLoggedIn ? (
     <div className="dropdown dropdown-end">
       <div
@@ -123,6 +136,54 @@ const Navbar = () => {
       data-aos="fade-down"
     >
       <div className="navbar-start">
+        {/* <button
+          onClick={handleTheme}
+          className="btn btn-ghost btn-circle transition-all duration-300"
+          aria-label="Toggle Theme"
+        >
+          {localStorage.getItem('theme') === 'homenestDark' ? (
+            <Sun className="h-5 w-5 text-yellow-400" />
+          ) : (
+            <Moon className="h-5 w-5 text-gray-700" />
+          )}
+        </button> */}
+        <div className="">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+                <FaBarsStaggered />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-56 bg-base-100 text-neutral "
+              align="start"
+            >
+              {navLinks
+                .filter(item => !item.auth || isLoggedIn)
+                .map((item, idx) => (
+                  <DropdownMenuItem key={idx}>
+                    <MyLink to={item.to} className="flex items-center gap-1">
+                      {item.label}
+                    </MyLink>
+                    <DropdownMenuShortcut>{item.icon}</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                ))}
+              <DropdownMenuItem>
+                <button
+                  onClick={handleTheme}
+                  className="flex items-center gap-1"
+                >
+                  {theme === 'homenestDark' ? (
+                    <Sun className="h-5 w-5 text-yellow-400" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-gray-700" />
+                  )}
+                  {theme === 'homenestDark' ? 'Light Mode' : 'Dark Mode'}
+                </button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
         <div className="dropdown">
           <div
             tabIndex={0}
@@ -148,7 +209,7 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52 text-neutral"
           >
-            {navLinks}
+            {}
           </ul>
         </div>
 
@@ -160,17 +221,33 @@ const Navbar = () => {
             Home<span className="text-primary">Nest</span>
           </span>
         </Link>
-        <input
-          onChange={e => handleTheme(e.target.checked)}
-          type="checkbox"
-          defaultChecked={localStorage.getItem('theme') === 'homenestDark'}
-          className="toggle"
-        />
       </div>
 
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 font-medium space-x-2">
-          {navLinks}
+          {' '}
+          {navLinks
+            .filter(item => !item.auth || isLoggedIn)
+            .map((item, idx) => (
+              <li key={idx}>
+                <MyLink to={item.to} className="flex items-center gap-1">
+                  {item.label}
+                </MyLink>
+              </li>
+            ))}
+          <li>
+            <button
+              onClick={handleTheme}
+              className="btn btn-ghost btn-circle transition-all duration-300"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'homenestDark' ? (
+                <Sun className="h-5 w-5 text-yellow-400" />
+              ) : (
+                <Moon className="h-5 w-5 text-gray-700" />
+              )}
+            </button>
+          </li>
         </ul>
       </div>
       <div className="navbar-end">{authUI}</div>
