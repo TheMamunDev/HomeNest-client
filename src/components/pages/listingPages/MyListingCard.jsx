@@ -139,7 +139,7 @@ const MyListingCard = ({ listing }) => {
         />
       </figure>
 
-      <div className="card-body p-6 flex flex-col justify-between">
+      <div className="card-body p-6 card-content flex flex-col justify-between">
         <div>
           <h2 className="card-title text-xl text-secondary mb-1">
             {listing.propertyName}
@@ -153,7 +153,7 @@ const MyListingCard = ({ listing }) => {
             {useFormatePrice(listing)}
           </p>
 
-          <div className="text-gray-600 space-y-1 text-sm mb-4">
+          <div className="text-base-300 space-y-1 text-sm mb-4">
             <p className="flex items-center">
               <FaLocationDot className="w-4 h-4 mr-1 text-primary/70" />{' '}
               {listing.location}

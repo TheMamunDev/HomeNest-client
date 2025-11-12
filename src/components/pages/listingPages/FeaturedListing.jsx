@@ -12,7 +12,7 @@ const FeaturedListing = () => {
 
   return (
     <section className="py-16 bg-base-200/50" data-aos="fade-up">
-      <div className="container mx-auto px-4">
+      <div className=" mx-auto md:px-0 px-4">
         <Heading
           title={'Explore Our'}
           highlight={'Featured Homes'}

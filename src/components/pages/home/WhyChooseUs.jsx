@@ -27,7 +27,7 @@ const serviceData = [
 const WhyChooseUs = () => {
   return (
     <section className="py-16 bg-base-200">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className=" mx-auto px-4 max-w-11/12">
         <Heading
           title={'Why Choose'}
           highlight={'HomeNest?'}

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 const apiSecure = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://homenest-api-server.vercel.app',
 });
 
 const useAxiosSecure = () => {

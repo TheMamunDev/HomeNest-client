@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import Spinner from '../../common/Spinner';
+import SpinnerMain from '../../common/SpinnerMain';
 import useAxiosSecure from '@/Hooks/useAxiosSecure';
 import { fetchRatings } from '@/Api/api';
+import { Badge } from '@/components/ui/badge';
+import { Spinner } from '@/components/ui/spinner';
 
 const Rating = ({ property }) => {
   const { user } = useContext(AuthContext);
@@ -48,8 +50,11 @@ const Rating = ({ property }) => {
       console.log(error);
     },
   });
+
+  const { isPending } = addReview;
+
   if (isLoading) {
-    return <Spinner></Spinner>;
+    return <SpinnerMain></SpinnerMain>;
   }
   const handleReviewSubmit = e => {
     e.preventDefault();
@@ -80,7 +85,7 @@ const Rating = ({ property }) => {
   return (
     <section
       className="flex flex-col md:flex-row gap-8 justify-between items-center mt-12 max-w-7xl mx-auto p-6 bg-base-100 rounded-lg shadow-xl border border-gray-200"
-      data-aos="fade-up"
+      data-aos="fade-down"
     >
       <div className="flex-1 w-full">
         <div className="flex justify-between items-center">
@@ -193,7 +198,14 @@ const Rating = ({ property }) => {
                 </div>
 
                 <button type="submit" className="btn btn-primary mt-4">
-                  Post Review
+                  {isPending ? (
+                    <Badge className="flex justify-center items-center">
+                      <Spinner />
+                      Submitting...
+                    </Badge>
+                  ) : (
+                    'Add Property'
+                  )}
                 </button>
               </form>
             </div>
@@ -219,7 +231,7 @@ const Rating = ({ property }) => {
           )
         ) : (
           <div className="text-center p-6 border-t border-gray-200 mt-8">
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-base-300">
               <Link
                 to="/login"
                 className="text-primary font-semibold hover:underline"

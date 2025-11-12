@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthContext';
-import Spinner from '../../common/Spinner';
+import SpinnerMain from '../../common/SpinnerMain';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 
 import useTitle from '../../../Hooks/useTitle';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '@/Hooks/useAxiosSecure';
+import { Badge } from '@/components/ui/badge';
+import { Spinner } from '@/components/ui/spinner';
 
 const AddProperty = () => {
   useTitle('Add Property');
@@ -16,7 +18,7 @@ const AddProperty = () => {
   const navigate = useNavigate();
   const secureApi = useAxiosSecure();
   if (loading) {
-    return <Spinner></Spinner>;
+    return <SpinnerMain></SpinnerMain>;
   }
   const categories = [
     'Rent',
@@ -57,6 +59,8 @@ const AddProperty = () => {
       }
     },
   });
+
+  const { isPending } = insertData;
 
   const handleSubmitListing = e => {
     e.preventDefault();
@@ -173,7 +177,6 @@ const AddProperty = () => {
                   placeholder="e.g., 550000 or 2500"
                   className="input input-bordered w-full focus:border-primary border-gray-200 text-neutral focus:ring-primary"
                   required
-                  min="100"
                 />
               </div>
               <div className="form-control">
@@ -208,9 +211,16 @@ const AddProperty = () => {
             <div className="form-control pt-4">
               <button
                 type="submit"
-                className="btn btn-primary w-full text-lg font-semibold transition duration-300"
+                className="btn btn-primary w-full text-lg font-semibold transition duration-300 "
               >
-                Add Property Listing
+                {isPending ? (
+                  <Badge className="flex justify-center items-center">
+                    <Spinner />
+                    Adding...
+                  </Badge>
+                ) : (
+                  'Add Property'
+                )}
               </button>
             </div>
           </form>

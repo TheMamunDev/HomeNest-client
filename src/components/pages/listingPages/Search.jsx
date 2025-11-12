@@ -1,4 +1,4 @@
-import Spinner from '../../common/Spinner';
+import Spinner from '../../common/SpinnerMain';
 import { FaDollarSign, FaSearch } from 'react-icons/fa';
 
 const SearchFilter = ({

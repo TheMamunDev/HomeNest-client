@@ -60,7 +60,7 @@ const PropertyDetailsPage = () => {
 
   return (
     <div className="py-12 bg-base-200" data-aos="fade-in">
-      <div className="container mx-auto px-4 max-w-7xl">
+      <div className=" mx-auto px-4 max-w-11/12">
         <div className="bg-base-100 rounded-xl shadow-2xl overflow-hidden mb-8 border border-gray-200">
           <figure className="w-full h-[30vh] md:h-[50vh] relative">
             <img

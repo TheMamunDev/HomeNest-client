@@ -7,7 +7,7 @@ import {
   getFilteredListings,
   getPriceRange,
 } from '../../../Api/api';
-import Spinner from '../../common/Spinner';
+import Spinner from '../../common/SpinnerMain';
 import PropertiesCard from './PropertiesCard';
 import { AuthContext } from '../../../contexts/AuthContext';
 import Heading from '../../common/Heading';
@@ -60,7 +60,7 @@ const Properties = () => {
   const totalCount = data?.total || 0;
   console.log(totalCount);
   return (
-    <div className=" max-w-7xl mx-auto bg-base-200">
+    <div className=" max-w-11/12 mx-auto bg-base-200">
       <div className="mt-10">
         <Heading
           title={'All Available'}

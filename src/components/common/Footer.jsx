@@ -12,9 +12,9 @@ const Footer = () => {
   const logoStyle = 'text-2xl font-bold text-gray-800';
   const highlightStyle = 'text-primary';
   return (
-    <footer className="footer p-10 bg-light-realestate text-base-content ">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <aside>
+    <footer className=" py-10 bg-light-realestate text-base-content ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto max-w-11/12 gap-6">
+        <aside className="w-full">
           <Link to="/" className="text-xl font-bold">
             <span className={logoStyle}>
               Home<span className={highlightStyle}>Nest</span>
@@ -26,7 +26,7 @@ const Footer = () => {
           </p>
         </aside>
 
-        <nav>
+        <nav className="w-full">
           <h6 className="footer-title text-lg text-gray-900">Contact Us</h6>
           <p className="link link-hover text-gray-600">
             Email: info@homenest.com
@@ -39,7 +39,7 @@ const Footer = () => {
           </p>
         </nav>
 
-        <nav>
+        <nav className="w-full">
           <h6 className="footer-title text-lg text-gray-900">Legal</h6>
           <Link to="/terms" className="link link-hover text-gray-600">
             Terms of use
@@ -52,9 +52,9 @@ const Footer = () => {
           </Link>
         </nav>
 
-        <nav className="items-end">
+        <nav className="">
           <h6 className="footer-title text-lg text-gray-900">Social</h6>
-          <div className="grid grid-flow-col gap-4 text-2xl text-gray-700">
+          <div className="flex flex-wrap justify-start items-center gap-4 text-2xl text-gray-700">
             <a
               href="https://x.com"
               target="_blank"

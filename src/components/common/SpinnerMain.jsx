@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Spinner = () => {
+const SpinnerMain = () => {
   return (
     <div className="max-w-11/12 mx-auto flex items-center justify-center min-h-screen">
       <span className="loading loading-ring  w-20 h-20 text-secondary"></span>
@@ -8,4 +8,4 @@ const Spinner = () => {
   );
 };
 
-export default Spinner;
+export default SpinnerMain;

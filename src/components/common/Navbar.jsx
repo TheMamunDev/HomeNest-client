@@ -146,84 +146,88 @@ const Navbar = () => {
   );
 
   return (
-    <div
-      className="navbar bg-light-realestate shadow-md sticky top-0 z-50 px-4 md:px-8"
+    <nav
+      className="sticky top-0 z-50 bg-light-realestate shadow-md"
       data-aos="fade-down"
     >
-      <div className="navbar-start">
-        <Link
-          to="/"
-          className="btn btn-ghost normal-case text-xl hover:bg-transparent"
-        >
-          <span className="text-2xl lg:text-3xl font-bold text-gray-800">
-            Home<span className="text-primary">Nest</span>
-          </span>
-        </Link>
-      </div>
-
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 font-medium space-x-2">
-          {' '}
-          {navLinks
-            .filter(item => !item.auth || isLoggedIn)
-            .map((item, idx) => (
-              <li key={idx}>
-                <MyLink to={item.to} className="flex items-center gap-1">
-                  {item.label}
-                </MyLink>
-              </li>
-            ))}
-          <li>
-            <button
-              onClick={handleTheme}
-              className="btn btn-ghost btn-circle transition-all duration-300"
-              aria-label="Toggle Theme"
+      <div className="max-w-11/12 mx-auto ">
+        <div className="navbar">
+          <div className="navbar-start">
+            <Link
+              to="/"
+              className="btn btn-ghost normal-case text-xl hover:bg-transparent"
             >
-              {theme === 'homenestDark' ? (
-                <Sun className="h-5 w-5 text-yellow-400" />
-              ) : (
-                <Moon className="h-5 w-5 text-gray-700" />
-              )}
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-end">{authUI}</div>
-      <div className="ml-3 lg:hidden">
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline">
-              <FaBarsStaggered />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-56 bg-base-100 text-neutral "
-            align="end"
-          >
-            {navLinks
-              .filter(item => !item.auth || isLoggedIn)
-              .map((item, idx) => (
-                <DropdownMenuItem key={idx}>
-                  <MyLink to={item.to} className="flex items-center gap-1">
-                    {item.label}
-                  </MyLink>
-                  <DropdownMenuShortcut>{item.icon}</DropdownMenuShortcut>
+              <span className="text-2xl lg:text-3xl font-bold text-gray-800">
+                Home<span className="text-primary">Nest</span>
+              </span>
+            </Link>
+          </div>
+
+          <div className="navbar-center hidden lg:flex">
+            <ul className="menu menu-horizontal px-1 font-medium space-x-2">
+              {' '}
+              {navLinks
+                .filter(item => !item.auth || isLoggedIn)
+                .map((item, idx) => (
+                  <li key={idx}>
+                    <MyLink to={item.to} className="flex items-center gap-1">
+                      {item.label}
+                    </MyLink>
+                  </li>
+                ))}
+              <li>
+                <button
+                  onClick={handleTheme}
+                  className="btn btn-ghost btn-circle transition-all duration-300"
+                  aria-label="Toggle Theme"
+                >
+                  {theme === 'homenestDark' ? (
+                    <Sun className="h-5 w-5 text-yellow-400" />
+                  ) : (
+                    <Moon className="h-5 w-5 text-gray-700" />
+                  )}
+                </button>
+              </li>
+            </ul>
+          </div>
+          <div className="navbar-end">{authUI}</div>
+          <div className="ml-3 lg:hidden">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">
+                  <FaBarsStaggered />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                className="w-56 bg-base-100 text-neutral "
+                align="end"
+              >
+                {navLinks
+                  .filter(item => !item.auth || isLoggedIn)
+                  .map((item, idx) => (
+                    <DropdownMenuItem key={idx}>
+                      <MyLink to={item.to} className="flex items-center gap-1">
+                        {item.label}
+                      </MyLink>
+                      <DropdownMenuShortcut>{item.icon}</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                  ))}
+                <DropdownMenuItem onClick={handleTheme}>
+                  <button className="flex items-center gap-1">
+                    {theme === 'homenestDark' ? (
+                      <Sun className="h-5 w-5 text-yellow-400" />
+                    ) : (
+                      <Moon className="h-5 w-5 text-gray-700" />
+                    )}
+                    {theme === 'homenestDark' ? 'Light Mode' : 'Dark Mode'}
+                  </button>
                 </DropdownMenuItem>
-              ))}
-            <DropdownMenuItem onClick={handleTheme}>
-              <button className="flex items-center gap-1">
-                {theme === 'homenestDark' ? (
-                  <Sun className="h-5 w-5 text-yellow-400" />
-                ) : (
-                  <Moon className="h-5 w-5 text-gray-700" />
-                )}
-                {theme === 'homenestDark' ? 'Light Mode' : 'Dark Mode'}
-              </button>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

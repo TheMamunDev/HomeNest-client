@@ -22,7 +22,7 @@ const PropertiesCard = ({ listing }) => {
         />
       </figure>
 
-      <div className="card-body p-5 flex flex-col justify-between">
+      <div className="card-body p-5 card-content flex flex-col justify-between">
         <div>
           <div className="flex justify-between items-start mb-2">
             <h2 className="card-title text-xl text-secondary">
