@@ -148,9 +148,13 @@ const PropertyDetailsPage = () => {
                 </p>
               </div>
 
-              <div>
+              <div className="max-w-full">
                 <p className="text-sm font-medium text-gray-500">Location</p>
-                <p className={detailTextStyle}>{property.location}</p>
+                <p
+                  className={`${detailTextStyle} break-words whitespace-normal`}
+                >
+                  {property.location}
+                </p>
               </div>
 
               <div>

@@ -100,10 +100,9 @@ const Properties = () => {
               defaultValue={filters.sort}
               onChange={handleFilterChange}
             >
-              <option value="default">Default</option>
+              <option value="latest">Latest</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
-              <option value="latest">Latest</option>
             </select>
           </div>
         </div>

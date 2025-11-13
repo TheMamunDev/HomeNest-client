@@ -25,7 +25,7 @@ const ListingCard = ({ listing }) => {
       <div className="card-body p-0 pt-0  flex flex-col  justify-between">
         <div className="card-content p-5 rounded-b-2xl">
           <div className="flex justify-between items-start mb-2">
-            <h2 className="card-title text-xl text-secondary-content">
+            <h2 className="card-title text-xl text-secondary-content line-clamp-2">
               {listing.propertyName}
             </h2>
             <div className="badge badge-accent text-xs font-semibold uppercase">
@@ -37,9 +37,9 @@ const ListingCard = ({ listing }) => {
             <AiFillDollarCircle className="w-5 h-5 text-primary" />
             {formattedPrice}
           </div>
-          <p className="flex items-center text-base-300 mb-3 text-sm">
+          <p className="flex items-center text-base-300 mb-3 text-sm ">
             <FaLocationDot className="w-4 h-4 mr-1" />
-            {listing.location}
+            <p className="line-clamp-2">{listing.location} </p>
           </p>
           <p className="text-base-300 text-sm mb-4 line-clamp-3">
             {listing.description}

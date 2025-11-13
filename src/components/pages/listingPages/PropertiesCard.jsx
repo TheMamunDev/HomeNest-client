@@ -25,7 +25,7 @@ const PropertiesCard = ({ listing }) => {
       <div className="card-body p-5 card-content flex flex-col justify-between">
         <div>
           <div className="flex justify-between items-start mb-2">
-            <h2 className="card-title text-xl text-secondary">
+            <h2 className="card-title text-xl text-secondary line-clamp-2">
               {listing.propertyName}
             </h2>
             <div className="badge badge-accent text-xs font-semibold uppercase">
@@ -38,7 +38,8 @@ const PropertiesCard = ({ listing }) => {
           </div>
 
           <p className="flex items-center text-base-300 mb-3 text-sm">
-            <FaLocationDot className="w-4 h-4 mr-1" /> {listing.location}
+            <FaLocationDot className="w-4 h-4 mr-1" />{' '}
+            <p className="line-clamp-2"> {listing.location}</p>
           </p>
 
           <p className="text-sm text-base-300 mt-2">

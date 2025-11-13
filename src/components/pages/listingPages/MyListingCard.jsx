@@ -141,7 +141,7 @@ const MyListingCard = ({ listing }) => {
 
       <div className="card-body p-6 card-content flex flex-col justify-between">
         <div>
-          <h2 className="card-title text-xl text-secondary mb-1">
+          <h2 className="card-title text-xl text-secondary mb-1 line-clamp-2">
             {listing.propertyName}
           </h2>
           <div className="badge badge-accent text-xs font-semibold uppercase mb-3">
@@ -156,7 +156,7 @@ const MyListingCard = ({ listing }) => {
           <div className="text-base-300 space-y-1 text-sm mb-4">
             <p className="flex items-center">
               <FaLocationDot className="w-4 h-4 mr-1 text-primary/70" />{' '}
-              {listing.location}
+              <p className="line-clamp-2">{listing.location}</p>
             </p>
             <p className="font-medium">Posted: {posted}</p>
           </div>
