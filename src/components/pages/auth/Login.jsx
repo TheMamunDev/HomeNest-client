@@ -12,14 +12,12 @@ const Login = () => {
   const location = useLocation();
   const { user, login, handleGoogleLogin, loading } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
-  // console.log(from);
   const from = location.state?.from?.pathname || '/';
   useEffect(() => {
     if (user) {
       navigate(from, { replace: true });
     }
   }, [user, navigate, from]);
-  // console.log(from);
   if (loading) {
     return <Spinner></Spinner>;
   }
@@ -42,15 +40,12 @@ const Login = () => {
 
   const handleGoogleBtn = e => {
     e.preventDefault();
-    // console.log('btn clicked');
     handleGoogleLogin()
-      .then(data => {
+      .then(() => {
         navigate(from, { replace: true });
         toast.success('Successfully Logged in');
-        console.log(data);
       })
       .catch(error => {
-        console.log(error.message);
         handleFirebaseError(error);
       });
   };

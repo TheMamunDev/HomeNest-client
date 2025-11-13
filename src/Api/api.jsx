@@ -46,7 +46,7 @@ export const getFilteredListings = async filters => {
       params.append('propertyName', filters.propertyName);
     if (filters.sort) params.append('sort', filters.sort);
 
-    // console.log(params.toString());
+    console.log(params.toString());
     const { data } = await api.get(`/listings?${params.toString()}`);
     return data;
   } catch (err) {

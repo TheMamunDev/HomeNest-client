@@ -62,26 +62,21 @@ const Register = () => {
           })
           .catch(error => {
             toast.error(error.message);
-            // console.log(error.message);
           });
       })
       .catch(error => {
-        toast.error(error.message);
+        handleFirebaseError(error);
       });
-    // console.log('Registration submitted');
   };
 
   const handleGoogleBtn = e => {
     e.preventDefault();
-    // console.log('btn clicked');
     handleGoogleLogin()
-      .then(data => {
+      .then(() => {
         navigate(from, { replace: true });
         toast.success('Successfully Logged in');
-        console.log(data);
       })
       .catch(error => {
-        console.log(error.message);
         handleFirebaseError(error);
       });
   };

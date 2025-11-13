@@ -1,45 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 
 const HeroSlider = () => {
-  const slideHeadingStyle =
-    'text-5xl md:text-7xl font-extrabold text-white leading-tight drop-shadow-lg';
-  const subTextStyle =
-    'text-xl md:text-3xl font-medium text-white drop-shadow-md mt-4 mb-8';
-  const image2 =
-    'https://placehold.co/1200x600/065F46/ffffff?text=MODERN+FAMILY+HOMES';
-  const image3 =
-    'https://placehold.co/1200x600/991B1B/ffffff?text=COMMERCIAL+LISTINGS';
-
   const slides = [
     {
       id: 'slide1',
-      img: 'https://argonaut.au.reastatic.net/resi-property/prod/homepage-web/web_sml-4ee24fa4ad9acc5ce8d5.jpg',
+      img: 'https://i.ibb.co.com/WvZqJnRp/web-sml-4ee24fa4ad9acc5ce8d5.jpg',
       alt: 'Luxury apartments for rent in the city.',
       headline: 'Find Your',
       highlight: 'Luxury Apartment',
       cta: 'Browse Rentals',
-      link: '/properties?type=rental',
+      link: '/properties?category=Rent',
       bgPos: 'center top',
     },
     {
       id: 'slide2',
-      img: 'https://www.outboundengine.com/wp-content/uploads/american-banking-buy-210617.jpg',
+      img: 'https://i.ibb.co.com/G4bnpY3w/american-banking-buy-210617.jpg',
       alt: 'Modern detached house with garden.',
       headline: 'Discover Your Next',
       highlight: 'Family Home',
       cta: 'View Homes for Sale',
-      link: '/properties?type=sale',
+      link: '/properties?category=Sale',
       bgPos: 'center center',
     },
     {
       id: 'slide3',
-      img: 'https://cdn.prod.website-files.com/6452fc5f71b71358e5f0d512/646fba8ff71d2467da2f6579_61ca30466cb6db42c43702b3_Blog%2520headers.png',
+      img: 'https://i.ibb.co.com/23wFtn7M/646fba8ff71d2467da2f6579-61ca30466cb6db42c43702b3-Blog-20headers.png',
       alt: 'Commercial buildings and office spaces.',
       headline: 'Invest in',
       highlight: 'Prime Commercial Real Estate',
       cta: 'See Investment Opportunities',
-      link: '/properties?type=commercial',
+      link: '/properties?category=Commercial',
       bgPos: 'center bottom',
     },
   ];
@@ -85,14 +76,14 @@ const HeroSlider = () => {
                   data-aos="fade-up"
                   data-aos-delay="400"
                 >
-                  <h1 className={slideHeadingStyle}>
+                  <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight drop-shadow-lg">
                     {slide.headline} <br />
                     <span className="text-white-400 bg-success/80 p-1 rounded-lg inline-block">
                       {slide.highlight}
                     </span>
                   </h1>
 
-                  <p className={subTextStyle}>
+                  <p className="text-xl md:text-3xl font-medium text-white drop-shadow-md mt-4 mb-8">
                     The perfect place to start your search.
                   </p>
                   <Link

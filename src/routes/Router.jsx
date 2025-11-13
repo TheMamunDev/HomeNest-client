@@ -10,11 +10,13 @@ import MyProperty from '../components/pages/listingPages/MyProperty';
 import PropertyDetailsPage from '../components/pages/listingPages/PropertyDetailsPage';
 import MyRatings from '../components/pages/ratingPages/MyRatings';
 import Properties from '../components/pages/listingPages/Properties';
+import NotFound from '@/components/common/NotFound';
 
 export const Router = createBrowserRouter([
   {
     path: '/',
     Component: Root,
+    errorElement: <NotFound></NotFound>,
     children: [
       {
         path: '/',

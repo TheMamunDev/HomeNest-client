@@ -11,12 +11,9 @@
   prefersdark: false;
   /color-scheme: light;
 
-  /* --color-base-100: oklch(98% 0.02 240); */
   --color-base-200: #ffffff;
   --color-base-300: 374151;
-  /* --color-base-content: oklch(20% 0.05 240); */
   --color-primary: #059669;
-  /* --color-primary-content: oklch(98% 0.01 240); */
   --color-secondary: #1f2937;
   --color-secondary-content: #047857;
   --color-accent: #059669;
@@ -57,11 +54,15 @@
   --color-secondary-content: #e5e7eb;
   --color-neutral: #e5e7eb;
   --color-success: #047857;
+  --color-success-content: #0a3021;
 }
 
 [data-theme='homenestDark'] {
   .card-content {
     background-color: #12123d;
+  }
+  .navbar-card-bg {
+    background-color: #0a3021;
   }
 }
 
@@ -69,10 +70,17 @@
   .card-content {
     background-color: #ffffff;
   }
+  .navbar-card-bg {
+    background-color: #88d9b9;
+  }
 }
 
 .bg-light-realestate {
   background-color: #f0fff4;
+}
+
+.btn-primary {
+  color: white !important;
 }
 
 .main-heading {

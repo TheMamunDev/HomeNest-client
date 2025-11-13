@@ -5,6 +5,9 @@ const handleFirebaseError = error => {
     case 'auth/invalid-credential':
       toast.error('Invalid User Credential.');
       break;
+    case 'auth/email-already-in-use':
+      toast.error('This email is already registered. Please log in instead.');
+      break;
     case 'auth/user-not-found':
       toast.error('No account found with this email.');
       break;

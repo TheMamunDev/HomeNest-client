@@ -27,7 +27,7 @@ const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
-  console.log(user);
+
   useEffect(() => {
     const html = document.querySelector('html');
     html.setAttribute('data-theme', theme);
@@ -146,10 +146,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav
-      className="sticky top-0 z-50 bg-light-realestate shadow-md"
-      data-aos="fade-down"
-    >
+    <nav className="sticky top-0 z-50 navbar-card-bg shadow-md">
       <div className="max-w-11/12 mx-auto ">
         <div className="navbar">
           <div className="navbar-start">
@@ -157,13 +154,13 @@ const Navbar = () => {
               to="/"
               className="btn btn-ghost normal-case text-xl hover:bg-transparent"
             >
-              <span className="text-2xl lg:text-3xl font-bold text-gray-800">
+              <span className="text-2xl lg:text-3xl font-bold text-secondary">
                 Home<span className="text-primary">Nest</span>
               </span>
             </Link>
           </div>
 
-          <div className="navbar-center hidden lg:flex">
+          <div className="navbar-center hidden lg:flex text-neutral">
             <ul className="menu menu-horizontal px-1 font-medium space-x-2">
               {' '}
               {navLinks
@@ -190,11 +187,11 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
-          <div className="navbar-end">{authUI}</div>
+          <div className="navbar-end text-neutral">{authUI}</div>
           <div className="ml-3 lg:hidden">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="outline">
+                <Button variant="outline" className="text-neutral">
                   <FaBarsStaggered />
                 </Button>
               </DropdownMenuTrigger>

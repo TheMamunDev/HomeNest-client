@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 import SearchFilter from './Search';
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -21,9 +21,10 @@ const Properties = () => {
   const [sortBy, setSortBy] = useState('Default');
   const [pageNumber, setPageNumber] = useState(0);
   const limit = 9;
+  const [searchParams] = useSearchParams();
 
   const [filters, setFilters] = useState({
-    category: 'All',
+    category: searchParams.get('category') || 'All',
     minPrice: '',
     maxPrice: '',
     propertyName: '',
@@ -49,7 +50,7 @@ const Properties = () => {
     queryFn: getPriceRange,
   });
 
-  const { data, isLoading, isFetching, isError, error } = useQuery({
+  const { data, isLoading, isFetching } = useQuery({
     queryKey: ['listings', filters],
     queryFn: () => getFilteredListings(filters),
     onError: err => {

@@ -25,7 +25,11 @@ const MarketInsights = () => {
   ];
 
   return (
-    <section className="py-16 bg-base-200/60">
+    <section
+      className="py-16 bg-base-200/60"
+      data-aos="fade-up"
+      data-aos-delay="400"
+    >
       <div className=" mx-auto px-4 max-w-11/12">
         <div className="lg:flex lg:items-center lg:space-x-12">
           <div className="lg:w-5/12 mb-8 lg:mb-0">
@@ -54,7 +58,7 @@ const MarketInsights = () => {
               </li>
             </ul>
           </div>
-          <div className="lg:w-7/12 grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="lg:w-7/12 grid grid-cols-1 md:grid-cols-3 gap-6 ">
             {stats.map((stat, index) => (
               <div
                 key={index}
