@@ -164,7 +164,7 @@ const MyListingCard = ({ listing }) => {
 
         <div className="card-actions justify-end space-x-2 mt-4 pt-4 border-t border-gray-100">
           <button
-            className="btn btn-sm btn-outline btn-primary hover:bg-primary transition duration-300"
+            className="btn btn-sm btn-primary hover:bg-success transition duration-300"
             onClick={() => navigate(`/propertie-details/${listing._id}`)}
           >
             <FaCircleInfo className="w-4 h-4" /> Details

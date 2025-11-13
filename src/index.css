@@ -6,9 +6,9 @@
 
 @custom-variant dark (&:is(.dark *));
 @plugin "daisyui/theme" {
-  name: 'light';
+  name: 'homenestLight';
   default: true;
-  prefersdark: false;
+  /prefersdark: false;
   /color-scheme: light;
 
   --color-base-200: #ffffff;
@@ -40,8 +40,7 @@
 
 @plugin "daisyui/theme" {
   name: 'homenestDark';
-  default: true;
-  prefersdark: false;
+  prefersdark: true;
   /color-scheme: light;
 
   --color-base-100: #131b1e;
@@ -66,17 +65,13 @@
   }
 }
 
-[data-theme='light'] {
+[data-theme='homenestLight'] {
   .card-content {
     background-color: #ffffff;
   }
   .navbar-card-bg {
     background-color: #88d9b9;
   }
-}
-
-.bg-light-realestate {
-  background-color: #f0fff4;
 }
 
 .btn-primary {

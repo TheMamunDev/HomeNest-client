@@ -145,11 +145,11 @@ const Properties = () => {
         )}
 
         <div className="text-center mt-16">
-          <div className="join">
+          <div className="join space-x-2">
             <button
               disabled={pageNumber === 0 ? true : false}
               onClick={() => setPageNumber(prev => prev - limit)}
-              className="join-item btn btn-primary btn-outline"
+              className="join-item btn btn-primary hovar:bg-success"
             >
               « Prev
             </button>
@@ -159,7 +159,7 @@ const Properties = () => {
             <button
               disabled={pageNumber + limit >= totalCount}
               onClick={() => setPageNumber(prev => prev + limit)}
-              className="join-item btn btn-primary btn-outline"
+              className="join-item btn btn-primary hover:bg-success"
             >
               Next »
             </button>

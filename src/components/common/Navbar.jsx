@@ -26,7 +26,9 @@ import { Spinner } from '../ui/spinner';
 const Navbar = () => {
   const { user, loading, logOut } = useContext(AuthContext);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') || 'homenestLight'
+  );
 
   useEffect(() => {
     const html = document.querySelector('html');
@@ -35,7 +37,7 @@ const Navbar = () => {
   }, [theme]);
 
   const handleTheme = () => {
-    setTheme(theme === 'light' ? 'homenestDark' : 'light');
+    setTheme(theme === 'homenestLight' ? 'homenestDark' : 'homenestLight');
     localStorage.setItem('theme', theme);
   };
 
