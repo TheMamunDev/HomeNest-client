@@ -84,3 +84,69 @@ single-page application:
   superior user experience.
 
 ---
+
+### Dependencies
+
+```bash
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.0.1",
+    "@fortawesome/free-brands-svg-icons": "^7.0.1",
+    "@fortawesome/free-regular-svg-icons": "^7.0.1",
+    "@fortawesome/free-solid-svg-icons": "^7.0.1",
+    "@fortawesome/react-fontawesome": "^3.0.2",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-toggle": "^1.1.10",
+    "@tailwindcss/vite": "^4.1.13",
+    "@tanstack/react-query": "^5.90.7",
+    "aos": "^2.3.4",
+    "axios": "^1.13.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "firebase": "^12.5.0",
+    "lucide-react": "^0.553.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-icons": "^5.5.0",
+    "react-rating": "^2.0.5",
+    "react-router": "^7.9.3",
+    "react-router-dom": "^7.9.5",
+    "react-spinners": "^0.17.0",
+    "react-toastify": "^11.0.5",
+    "sweetalert2": "^11.26.3",
+    "tailwind-merge": "^3.4.0",
+    "tailwindcss": "^4.1.13"
+  },
+```
+
+### 🚀 Getting Started (Local Setup)
+
+To view and run this project locally, follow these simple steps:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/TheMamunDev/HomeNest-client.git
+    ```
+
+2.  **Navigate to the project directory:**
+    ```bash
+    cd HomeNest-client
+    ```
+3. **Change The Firebase Config**
+    Change firebase config in firebase.init.js
+   
+5. **Run**
+   ```bash
+   npm install
+   npm run dev
+   ```
+### 👨‍💻 Author
+
+This project was developed by **Mahmud Hasan Mamun**.
+
+* **GitHub:** [@TheMamunDev](https://github.com/TheMamunDev)
+
+
+
+
+    
