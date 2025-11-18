@@ -9,6 +9,10 @@ search and filtering capabilities.
 
 [https://homenest-mt.netlify.app/]
 
+## Server Api URL
+
+[https://homenest-api-server.vercel.app]
+
 ## Key Features
 
 HomeNest is built using modern React principles and a powerful design stack,
