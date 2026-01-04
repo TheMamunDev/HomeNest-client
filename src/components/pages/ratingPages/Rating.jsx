@@ -1,0 +1,251 @@
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import SpinnerMain from '../../common/SpinnerMain';
+import useAxiosSecure from '@/Hooks/useAxiosSecure';
+import { fetchRatings } from '@/Api/api';
+import { Badge } from '@/components/ui/badge';
+import { Spinner } from '@/components/ui/spinner';
+
+const Rating = ({ property }) => {
+  const { user } = useContext(AuthContext);
+  const secureApi = useAxiosSecure();
+  const { data: reviewData, isLoading } = useQuery({
+    queryKey: ['all-ratings', property._id],
+    queryFn: () => fetchRatings(property._id),
+    onError: error => {
+      toast.error('Error to get ratings!');
+      console.log(error);
+    },
+  });
+  const queryClient = useQueryClient();
+  const [form, setForm] = useState(null);
+  const [myRating, setMyRating] = useState(0);
+  const [myReviewText, setMyReviewText] = useState('');
+
+  const addReview = useMutation({
+    mutationFn: async data => {
+      try {
+        const res = await secureApi.post('/ratings', data);
+        return res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    onSuccess: (res, data) => {
+      queryClient.setQueryData(['all-ratings', property._id], oldData => {
+        return [...oldData, data];
+      });
+      if (data.insertedId) {
+        toast.success('Review submitted successfully! Thank you.', {
+          position: 'top-center',
+        });
+        form.target.reset();
+      }
+    },
+    onError: error => {
+      toast.error('Data Inserting Failed !');
+      console.log(error);
+    },
+  });
+
+  const { isPending } = addReview;
+
+  if (isLoading) {
+    return <SpinnerMain></SpinnerMain>;
+  }
+  const handleReviewSubmit = e => {
+    e.preventDefault();
+    setForm(e);
+    if (myRating === 0) {
+      toast.error('Please select a star rating.', { position: 'top-center' });
+      return;
+    }
+    const data = {
+      propertyId: property._id,
+      propertyName: property.propertyName,
+      propertyImage: property.imageLink,
+      reviewerName: user.displayName,
+      reviewerEmail: user.email,
+      rating: myRating,
+      review: myReviewText,
+      reviewed: new Date().toISOString(),
+    };
+    addReview.mutate(data);
+    setMyRating(0);
+    setMyReviewText('');
+  };
+
+  const hasReviewed = reviewData?.some(
+    review => review.reviewerEmail === user.email
+  );
+
+  return (
+    <section
+      className="flex flex-col  gap-8 justify-between items-center mt-12 max-w-7xl mx-auto bg-base-100 rounded-lg "
+      data-aos="fade-down"
+    >
+      <div className="flex-1 w-full">
+        <div className="flex justify-between items-center">
+          <h3 className="text-2xl md:text-3xl font-extrabold text-secondary mb-6 border-b pb-3">
+            Ratings & <span className="text-primary">Reviews</span>
+          </h3>
+        </div>
+        <div className="space-y-6 mb-10">
+          {reviewData?.length === 0 ? (
+            <div className="alert alert-info text-secondary bg-accent/20">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="stroke-current shrink-0 w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <span>
+                This property has no review , write your review bellow.
+              </span>
+            </div>
+          ) : (
+            reviewData?.map(review => (
+              <div key={review._id} className="border-b border-gray-100 pb-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="avatar">
+                    <div className="w-10 rounded-full">
+                      <img
+                        src={`https://i.pravatar.cc/150?u=${review._id}`}
+                        alt={review.reviewerName}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-secondary">
+                      {review.reviewerName}
+                    </p>
+                    <span className="text-xs text-gray-500">
+                      {new Date(review.reviewed).toLocaleDateString()}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="rating rating-sm mb-2">
+                  {[1, 2, 3, 4, 5].map(i => (
+                    <input
+                      key={i}
+                      type="radio"
+                      name={`rating-${review.id}`}
+                      className={`mask mask-star-2 ${
+                        i <= review.rating ? 'bg-neutral' : 'bg-gray-300'
+                      }`}
+                      checked={i === review.rating}
+                      readOnly
+                    />
+                  ))}
+                </div>
+                <p className="text-gray-700 text-sm">{review.review}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+      <div className="flex-1 w-full">
+        {user ? (
+          !hasReviewed ? (
+            <div className="mt-8 ">
+              <h4 className="text-xl font-semibold text-secondary mb-4">
+                Submit Your Review
+              </h4>
+              <form onSubmit={handleReviewSubmit} className="space-y-4">
+                <div className="form-control">
+                  <label className="label mb-2">
+                    <span className="label-text font-medium text-secondary">
+                      Your Rating ({myRating} stars)
+                    </span>
+                  </label>
+                  <br />
+                  <div className="rating rating-lg">
+                    {[1, 2, 3, 4, 5].map(i => (
+                      <input
+                        key={i}
+                        type="radio"
+                        name="rating-input"
+                        className="mask mask-star-2 bg-primary"
+                        checked={myRating === i}
+                        onChange={() => setMyRating(i)}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <div className="form-control flex flex-col">
+                  <label className="label">
+                    <span className="label-text font-medium text-secondary mb-2.5">
+                      Write Review
+                    </span>
+                  </label>
+                  <textarea
+                    className="textarea textarea-bordered border-gray-200 text-neutral w-full h-24 focus:border-primary focus:ring-primary"
+                    placeholder="Share your experience "
+                    value={myReviewText}
+                    onChange={e => setMyReviewText(e.target.value)}
+                    required
+                  ></textarea>
+                </div>
+
+                <button type="submit" className="btn btn-primary mt-4">
+                  {isPending ? (
+                    <Badge className="flex justify-center items-center">
+                      <Spinner />
+                      Submitting...
+                    </Badge>
+                  ) : (
+                    'Submit'
+                  )}
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div className="alert alert-info text-secondary bg-accent/20">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="stroke-current shrink-0 w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+              <span>
+                You have already submitted a review for this property.
+              </span>
+            </div>
+          )
+        ) : (
+          <div className="text-center p-6 border-t border-gray-200 mt-8">
+            <p className="text-lg text-base-300">
+              <Link
+                to="/login"
+                className="text-primary font-semibold hover:underline"
+              >
+                Login
+              </Link>{' '}
+              to submit a rating and review for this property.
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default Rating;
