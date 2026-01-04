@@ -1,9 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-<<<<<<< HEAD
 import { Link, useNavigate } from 'react-router';
-=======
-import { Link } from 'react-router';
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
 import { AuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 import MyLink from './MyLink';
@@ -33,10 +29,7 @@ const Navbar = () => {
   const [theme, setTheme] = useState(
     localStorage.getItem('theme') || 'homenestLight'
   );
-<<<<<<< HEAD
   const navigate = useNavigate();
-=======
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
 
   useEffect(() => {
     const html = document.querySelector('html');
@@ -75,24 +68,12 @@ const Navbar = () => {
       icon: <MdOutlineRealEstateAgent />,
     },
     {
-<<<<<<< HEAD
       label: 'Dashboard',
       to: '/dashboard',
-=======
-      label: 'Add Property',
-      to: '/add-property',
-      icon: <MdNoteAdd />,
-      auth: true,
-    },
-    {
-      label: 'My Properties',
-      to: '/my-properties',
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
       icon: <MdRealEstateAgent />,
       auth: true,
     },
     {
-<<<<<<< HEAD
       label: 'About Us',
       to: '/about',
       icon: <MdOutlineRealEstateAgent />,
@@ -101,12 +82,6 @@ const Navbar = () => {
       label: 'Terms of Use',
       to: '/terms-of-uses',
       icon: <MdOutlineRealEstateAgent />,
-=======
-      label: 'My Ratings',
-      to: '/my-ratings',
-      icon: <MdStarBorder />,
-      auth: true,
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
     },
   ];
 
@@ -146,7 +121,6 @@ const Navbar = () => {
         </li>
         <li>
           <button
-<<<<<<< HEAD
             className="btn btn-sm btn-ghost w-full  text-sm justify-start text-green-500 hover:bg-green-50"
             onClick={() => navigate('/dashboard')}
           >
@@ -155,8 +129,6 @@ const Navbar = () => {
         </li>
         <li>
           <button
-=======
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
             className="btn btn-sm btn-ghost w-full  text-sm justify-start text-red-500 hover:bg-red-50"
             onClick={handleLogOut}
           >
@@ -184,7 +156,6 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-50 navbar-card-bg shadow-md">
-<<<<<<< HEAD
       <div className="max-w-[1920px] mx-auto">
         <div className="max-w-11/12 mx-auto ">
           <div className="navbar">
@@ -217,78 +188,11 @@ const Navbar = () => {
                     className="btn btn-ghost btn-circle transition-all duration-300"
                     aria-label="Toggle Theme"
                   >
-=======
-      <div className="max-w-11/12 mx-auto ">
-        <div className="navbar">
-          <div className="navbar-start">
-            <Link
-              to="/"
-              className="btn btn-ghost normal-case text-xl hover:bg-transparent"
-            >
-              <span className="text-2xl lg:text-3xl font-bold text-secondary">
-                Home<span className="text-primary">Nest</span>
-              </span>
-            </Link>
-          </div>
-
-          <div className="navbar-center hidden lg:flex text-neutral">
-            <ul className="menu menu-horizontal px-1 font-medium space-x-2">
-              {' '}
-              {navLinks
-                .filter(item => !item.auth || isLoggedIn)
-                .map((item, idx) => (
-                  <li key={idx}>
-                    <MyLink to={item.to} className="flex items-center gap-1">
-                      {item.label}
-                    </MyLink>
-                  </li>
-                ))}
-              <li>
-                <button
-                  onClick={handleTheme}
-                  className="btn btn-ghost btn-circle transition-all duration-300"
-                  aria-label="Toggle Theme"
-                >
-                  {theme === 'homenestDark' ? (
-                    <Sun className="h-5 w-5 text-yellow-400" />
-                  ) : (
-                    <Moon className="h-5 w-5 text-gray-700" />
-                  )}
-                </button>
-              </li>
-            </ul>
-          </div>
-          <div className="navbar-end text-neutral">{authUI}</div>
-          <div className="ml-3 lg:hidden">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="text-neutral">
-                  <FaBarsStaggered />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-56 bg-base-100 text-neutral "
-                align="end"
-              >
-                {navLinks
-                  .filter(item => !item.auth || isLoggedIn)
-                  .map((item, idx) => (
-                    <DropdownMenuItem key={idx}>
-                      <MyLink to={item.to} className="flex items-center gap-1">
-                        {item.label}
-                      </MyLink>
-                      <DropdownMenuShortcut>{item.icon}</DropdownMenuShortcut>
-                    </DropdownMenuItem>
-                  ))}
-                <DropdownMenuItem onClick={handleTheme}>
-                  <button className="flex items-center gap-1">
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
                     {theme === 'homenestDark' ? (
                       <Sun className="h-5 w-5 text-yellow-400" />
                     ) : (
                       <Moon className="h-5 w-5 text-gray-700" />
                     )}
-<<<<<<< HEAD
                   </button>
                 </li>
               </ul>
@@ -331,13 +235,6 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-=======
-                    {theme === 'homenestDark' ? 'Light Mode' : 'Dark Mode'}
-                  </button>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
           </div>
         </div>
       </div>

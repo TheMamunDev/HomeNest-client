@@ -9,13 +9,6 @@ search and filtering capabilities.
 
 [https://homenest-mt.netlify.app/]
 
-<<<<<<< HEAD
-=======
-## Server Api URL
-
-[https://homenest-api-server.vercel.app]
-
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
 ## Key Features
 
 HomeNest is built using modern React principles and a powerful design stack,
@@ -91,8 +84,6 @@ single-page application:
   superior user experience.
 
 ---
-<<<<<<< HEAD
-=======
 
 ### Dependencies
 
@@ -133,6 +124,7 @@ single-page application:
 To view and run this project locally, follow these simple steps:
 
 1.  **Clone the repository:**
+
     ```bash
     git clone https://github.com/TheMamunDev/HomeNest-client.git
     ```
@@ -141,22 +133,15 @@ To view and run this project locally, follow these simple steps:
     ```bash
     cd HomeNest-client
     ```
-3. **Change The Firebase Config**
-    Change firebase config in firebase.init.js
-   
-5. **Run**
-   ```bash
-   npm install
-   npm run dev
-   ```
+3.  **Change The Firebase Config** Change firebase config in firebase.init.js
+4.  **Run**
+    ```bash
+    npm install
+    npm run dev
+    ```
+
 ### 👨‍💻 Author
 
 This project was developed by **Mahmud Hasan Mamun**.
 
-* **GitHub:** [@TheMamunDev](https://github.com/TheMamunDev)
-
-
-
-
-    
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
+- **GitHub:** [@TheMamunDev](https://github.com/TheMamunDev)

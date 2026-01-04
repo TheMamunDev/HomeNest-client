@@ -1,4 +1,7 @@
+import SpinnerMain from '@/components/common/SpinnerMain';
 import { AuthContext } from '@/contexts/AuthContext';
+import useAxiosSecure from '@/Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
@@ -13,7 +16,7 @@ import {
 
 const UserProfile = () => {
   const { user, loading, updateUserProfile } = useContext(AuthContext);
-  console.log(user);
+
   const fileInputRef = useRef(null);
   const [preview, setPreview] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -22,6 +25,20 @@ const UserProfile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const secureApi = useAxiosSecure();
+
+  const { data: myListings = [], isLoading } = useQuery({
+    queryKey: ['my-listing', user?.email],
+    queryFn: async () => {
+      try {
+        const result = await secureApi.get(`/my-listing?email=${user.email}`);
+        return result.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
 
   const onSubmit = async data => {
     const formData = new FormData();
@@ -75,18 +92,8 @@ const UserProfile = () => {
     return data.data.url;
   };
 
-  // const user = {
-  //   displayName: 'Mahmud Hasan',
-  //   email: 'mahmud@example.com',
-  //   photoURL:
-  //     'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
-  //   role: 'Property Owner',
-  //   phone: '+880 1700 000000',
-  //   address: 'Dhaka, Bangladesh',
-  //   joinDate: 'January 2024',
-  // };
-  if (loading) {
-    return <div>Loading...</div>;
+  if (loading || isLoading) {
+    return <SpinnerMain></SpinnerMain>;
   }
 
   return (
@@ -160,7 +167,9 @@ const UserProfile = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="p-4 bg-gray-50 rounded-xl text-center border border-gray-100">
                 <FaBuilding className="text-2xl text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-secondary">12</div>
+                <div className="text-2xl font-bold text-secondary">
+                  {myListings?.length}
+                </div>
                 <div className="text-xs text-gray-500 uppercase tracking-wide">
                   Properties
                 </div>
@@ -259,6 +268,7 @@ const UserProfile = () => {
                       pattern: /((01){1}[3456789]{1}(\d){8})$/,
                     })}
                     type="tel"
+                    disabled
                     placeholder="Your Phone"
                     defaultValue={user.phone}
                     className="input input-bordered focus:border-primary focus:outline-none"

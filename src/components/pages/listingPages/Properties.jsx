@@ -7,10 +7,6 @@ import {
   getFilteredListings,
   getPriceRange,
 } from '../../../Api/api';
-<<<<<<< HEAD
-=======
-import Spinner from '../../common/SpinnerMain';
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
 import PropertiesCard from './PropertiesCard';
 import { AuthContext } from '../../../contexts/AuthContext';
 import Heading from '../../common/Heading';
@@ -25,17 +21,11 @@ const Properties = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const limit = 9;
   const [searchParams] = useSearchParams();
-<<<<<<< HEAD
   console.log(searchParams.get('location'));
 
   const [filters, setFilters] = useState({
     category: searchParams.get('category') || 'All',
     location: searchParams.get('location') || '',
-=======
-
-  const [filters, setFilters] = useState({
-    category: searchParams.get('category') || 'All',
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
     minPrice: '',
     maxPrice: '',
     propertyName: '',
@@ -70,14 +60,8 @@ const Properties = () => {
   });
   const listings = data?.data || [];
   const totalCount = data?.total || 0;
-<<<<<<< HEAD
   return (
     <div className="max-w-11/12 mx-auto bg-base-200">
-=======
-  console.log(totalCount);
-  return (
-    <div className=" max-w-11/12 mx-auto bg-base-200">
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
       <div className="mt-10">
         <Heading
           title={'All Available'}
@@ -123,11 +107,7 @@ const Properties = () => {
           </div>
         </div>
         {isFetching || isLoading ? (
-<<<<<<< HEAD
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
-=======
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
             {Array.from({ length: 8 }).map((_, i) => (
               <MyListingSkeleton key={i} />
             ))}
@@ -156,11 +136,7 @@ const Properties = () => {
             )}
           </div>
         ) : (
-<<<<<<< HEAD
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
-=======
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
             {listings?.map(listing => (
               <PropertiesCard key={listing._id} listing={listing} />
             ))}

@@ -25,19 +25,12 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-<<<<<<< HEAD
   const updateUserProfile = (name, photo, number) => {
     console.log(name, photo, number);
     return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photo,
       phoneNumber: number,
-=======
-  const updateUserProfile = (name, photo) => {
-    return updateProfile(auth.currentUser, {
-      displayName: name,
-      photoURL: photo,
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
     });
   };
 

@@ -12,7 +12,7 @@ import {
 import { AuthContext } from '@/contexts/AuthContext';
 
 const DashboardLayout = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { logOut, user } = useContext(AuthContext);
   const navLinks = [
     { path: '/dashboard', title: 'Overview', icon: <FaHome /> },
     { path: '/dashboard/profile', title: 'My Profile', icon: <FaUser /> },
@@ -118,16 +118,14 @@ const DashboardLayout = () => {
             <div className="mt-6 flex items-center gap-3 px-4 py-3 bg-white/5 rounded-xl border border-white/10">
               <div className="avatar online">
                 <div className="w-10 rounded-full">
-                  <img src="https://i.pravatar.cc/150?img=3" alt="User" />
+                  <img src={user?.photoURL} alt="User" />
                 </div>
               </div>
               <div className="flex-1 overflow-hidden">
                 <h4 className="text-sm font-bold text-white truncate">
-                  John Doe
+                  {user?.displayName || 'John Doe'}
                 </h4>
-                <p className="text-xs text-gray-400 truncate">
-                  john@example.com
-                </p>
+                <p className="text-xs text-gray-400 truncate">{user.email}</p>
               </div>
             </div>
           </div>

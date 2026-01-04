@@ -28,23 +28,16 @@
     "lucide-react": "^0.553.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-<<<<<<< HEAD
     "react-hook-form": "^7.69.0",
-=======
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
     "react-icons": "^5.5.0",
     "react-rating": "^2.0.5",
     "react-router": "^7.9.3",
     "react-router-dom": "^7.9.5",
     "react-spinners": "^0.17.0",
     "react-toastify": "^11.0.5",
-<<<<<<< HEAD
     "recharts": "^3.6.0",
     "sweetalert2": "^11.26.3",
     "swiper": "^12.0.3",
-=======
-    "sweetalert2": "^11.26.3",
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.13"
   },

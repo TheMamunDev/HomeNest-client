@@ -26,19 +26,11 @@ const MarketInsights = () => {
 
   return (
     <section
-<<<<<<< HEAD
       className="py-16 bg-base-200/60 px-4"
       data-aos="fade-up"
       data-aos-delay="400"
     >
       <div className="container mx-auto ">
-=======
-      className="py-16 bg-base-200/60"
-      data-aos="fade-up"
-      data-aos-delay="400"
-    >
-      <div className=" mx-auto px-4 max-w-11/12">
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
         <div className="lg:flex lg:items-center lg:space-x-12">
           <div className="lg:w-5/12 mb-8 lg:mb-0">
             <div className="flex items-center text-primary mb-3">

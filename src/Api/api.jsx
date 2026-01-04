@@ -44,15 +44,9 @@ export const getFilteredListings = async filters => {
     if (filters.maxPrice) params.append('maxPrice', filters.maxPrice);
     if (filters.propertyName)
       params.append('propertyName', filters.propertyName);
-<<<<<<< HEAD
     if (filters.location) params.append('location', filters.location);
     if (filters.sort) params.append('sort', filters.sort);
 
-=======
-    if (filters.sort) params.append('sort', filters.sort);
-
-    console.log(params.toString());
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
     const { data } = await api.get(`/listings?${params.toString()}`);
     return data;
   } catch (err) {

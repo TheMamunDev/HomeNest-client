@@ -11,15 +11,12 @@ import MyRatings from '../components/pages/ratingPages/MyRatings';
 import Properties from '../components/pages/listingPages/Properties';
 import NotFound from '@/components/common/NotFound';
 import PropertyDetails from '@/components/pages/listingPages/PropertieDetails';
-<<<<<<< HEAD
 import About from '@/components/pages/AboutUs/AboutUs';
 import TermsOfUses from '@/components/pages/TermsOfUses/TermsOfUses';
 import DashboardLayout from '@/layout/DashboardLayout';
 import WhyChooseUs from '@/components/pages/home/WhyChooseUs';
 import UserProfile from '@/components/pages/UserProfile/UserProfile';
 import UserDashboard from '@/components/pages/UserDashboard/UserDashboard';
-=======
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
 
 export const Router = createBrowserRouter([
   {
@@ -45,7 +42,6 @@ export const Router = createBrowserRouter([
         Component: Properties,
       },
       {
-<<<<<<< HEAD
         path: 'about',
         Component: About,
       },
@@ -86,38 +82,6 @@ export const Router = createBrowserRouter([
       {
         path: '/dashboard/my-reviews',
         Component: MyRatings,
-=======
-        path: 'add-property',
-        element: (
-          <PrivateRoute>
-            <AddProperty></AddProperty>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'my-properties',
-        element: (
-          <PrivateRoute>
-            <MyProperty></MyProperty>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'propertie-details/:id',
-        element: (
-          <PrivateRoute>
-            <PropertyDetails></PropertyDetails>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'my-ratings',
-        element: (
-          <PrivateRoute>
-            <MyRatings></MyRatings>
-          </PrivateRoute>
-        ),
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
       },
     ],
   },

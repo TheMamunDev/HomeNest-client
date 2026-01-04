@@ -75,13 +75,8 @@ const AddProperty = () => {
   };
 
   return (
-<<<<<<< HEAD
     <div className="bg-base-200 min-h-screen" data-aos="fade-in">
       <div className="container mx-auto px-4 max-w-7xl">
-=======
-    <div className="py-12 bg-base-200 min-h-screen" data-aos="fade-in">
-      <div className="container mx-auto px-4 max-w-4xl">
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
         <div className="bg-base-100 p-8 md:p-12 rounded-lg shadow-2xl border border-gray-200">
           <h2 className="text-3xl font-extrabold md:text-4xl text-secondary text-center mb-2">
             Add Your <span className="text-primary">Property Listing</span>

@@ -18,14 +18,11 @@ const Login = () => {
       navigate(from, { replace: true });
     }
   }, [user, navigate, from]);
-<<<<<<< HEAD
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
 
-=======
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
   if (loading) {
     return <Spinner></Spinner>;
   }
@@ -89,10 +86,7 @@ const Login = () => {
               placeholder="you@example.com"
               className="input-field input-bordered"
               required
-<<<<<<< HEAD
               defaultValue={formData.email}
-=======
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
             />
           </div>
 
@@ -110,16 +104,12 @@ const Login = () => {
                 required
                 className="input-field input-bordered"
                 placeholder="Password"
-<<<<<<< HEAD
                 defaultValue={formData.password}
-=======
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
               />
               <button className="text-base-300" onClick={showPassHandle}>
                 {showPass ? <IoIosEyeOff /> : <IoIosEye />}
               </button>
             </label>
-<<<<<<< HEAD
             <div className="space-y-2 mt-2">
               <p className="label-text-alt text-primary hover:underline text-sm transition-colors cursor-pointer">
                 Forgot password?
@@ -135,12 +125,6 @@ const Login = () => {
               >
                 Click here to auto fill user credentials
               </p>
-=======
-            <div className="label pt-1 pb-0 justify-end">
-              <p className="label-text-alt text-primary hover:underline text-sm transition-colors">
-                Forgot password?
-              </p>
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
             </div>
           </div>
 

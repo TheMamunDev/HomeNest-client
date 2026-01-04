@@ -27,13 +27,8 @@ const FeaturedListing = () => {
         ></Heading>
 
         {isLoading || isFetching ? (
-<<<<<<< HEAD
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
             {Array.from({ length: 8 }).map((_, i) => (
-=======
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-            {Array.from({ length: 6 }).map((_, i) => (
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
               <div
                 key={i}
                 className="animate-pulse bg-white rounded-xl shadow p-4"
@@ -58,11 +53,7 @@ const FeaturedListing = () => {
             ))}
           </div>
         ) : (
-<<<<<<< HEAD
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
-=======
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
->>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
             {ListingItems?.map(listing => (
               <ListingCard key={listing._id} listing={listing}></ListingCard>
             ))}
