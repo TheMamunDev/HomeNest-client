@@ -8,6 +8,7 @@ import Spinner from '../components/common/SpinnerMain';
 const Root = () => {
   const navigation = useNavigation();
   return (
+<<<<<<< HEAD
     <>
       <Navbar />
       <div className="max-w-[1920px] mx-auto">
@@ -16,6 +17,14 @@ const Root = () => {
       <Footer></Footer>
       <ToastContainer />
     </>
+=======
+    <div className="max-w-[1920px] mx-auto">
+      <Navbar />
+      {navigation.state === 'loading' ? <Spinner /> : <Outlet />}
+      <Footer></Footer>
+      <ToastContainer />
+    </div>
+>>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
   );
 };
 

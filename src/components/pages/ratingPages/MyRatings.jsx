@@ -48,7 +48,11 @@ const MyRatings = () => {
   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen max-w-11/12 mx-auto px-4">
+=======
+    <div className="min-h-screen max-w-11/12 mx-auto px-4 py-16">
+>>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
       <Heading
         title={'My Ratings'}
         highlight={'& Feedback'}

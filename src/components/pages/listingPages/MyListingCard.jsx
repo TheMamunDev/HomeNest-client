@@ -162,7 +162,11 @@ const MyListingCard = ({ listing }) => {
           </div>
         </div>
 
+<<<<<<< HEAD
         <div className="card-actions items-center space-x-2 mt-4 pt-4 border-t border-gray-100">
+=======
+        <div className="card-actions justify-end space-x-2 mt-4 pt-4 border-t border-gray-100">
+>>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
           <button
             className="btn btn-sm btn-primary hover:bg-success transition duration-300"
             onClick={() => navigate(`/propertie-details/${listing._id}`)}
@@ -291,7 +295,11 @@ const MyListingCard = ({ listing }) => {
                     placeholder="e.g., 550000"
                     className="input-field input-bordered "
                     required
+<<<<<<< HEAD
                     min="1"
+=======
+                    min="100"
+>>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
                   />
                 </div>
                 <div className="form-control">

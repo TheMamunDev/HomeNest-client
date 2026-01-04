@@ -2,6 +2,7 @@ import useAxiosSecure from '@/Hooks/useAxiosSecure';
 import { useFormatePrice } from '@/Hooks/useFormatePrice';
 import useTitle from '@/Hooks/useTitle';
 import { useQuery } from '@tanstack/react-query';
+<<<<<<< HEAD
 import React, { useContext } from 'react';
 import { FaDollarSign } from 'react-icons/fa';
 import { FaCalendarDays, FaLocationDot } from 'react-icons/fa6';
@@ -14,18 +15,35 @@ import axios from 'axios';
 import api from '@/Api/api';
 import { AuthContext } from '@/contexts/AuthContext';
 
+=======
+import React from 'react';
+import { FaDollarSign } from 'react-icons/fa';
+import { FaCalendarDays, FaLocationDot } from 'react-icons/fa6';
+import { IoIosMailOpen } from 'react-icons/io';
+import { useNavigate, useParams } from 'react-router';
+import Rating from '../ratingPages/Rating';
+import { useFormateDate } from '@/Hooks/useFormateDate';
+
+>>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
 const PropertyDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const secureApi = useAxiosSecure();
+<<<<<<< HEAD
   const { user } = useContext(AuthContext);
 
+=======
+>>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
   const detailTextStyle = 'text-lg text-secondary font-semibold';
   const { data: property, isLoading } = useQuery({
     queryKey: ['listing-details'],
     queryFn: async () => {
       try {
+<<<<<<< HEAD
         const result = await api.get(`/listing/${id}`);
+=======
+        const result = await secureApi.get(`/listing/${id}`);
+>>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
         return result.data;
       } catch (error) {
         console.log(error);
@@ -210,6 +228,7 @@ const PropertyDetails = () => {
                 Contact {property.name}
               </button>
             </div>
+<<<<<<< HEAD
             {user ? (
               <Rating property={property}></Rating>
             ) : (
@@ -225,6 +244,10 @@ const PropertyDetails = () => {
                 </p>
               </div>
             )}
+=======
+
+            <Rating property={property}></Rating>
+>>>>>>> 955378fc3f37df8fc63ad238e441a9b4bd82a9a2
           </div>
         </div>
       </div>
